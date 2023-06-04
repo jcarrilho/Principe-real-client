@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import './index.css'
 import Paper from '@mui/material/Paper';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 const API_URL = 'http://localhost:5005'
@@ -37,7 +38,7 @@ export default function MarketplacePage() {
       {services.map((service) => {
         return (
           <div key={service._id}>
-            <Paper elevation={10} sx={{borderRadius: 3}}>
+            <Paper elevation={10} sx={{ borderRadius: 3 }}>
               <Box>
                 <Card sx={{
                   maxWidth: 345,
@@ -70,9 +71,16 @@ export default function MarketplacePage() {
                 </Card>
               </Box>
             </Paper>
+
           </div>
         )
       })}
+      <Button size="small"  sx={{position:'fixed',
+      right: 0,
+      bottom: 0}}>
+        <AddCircleIcon sx={{width: '100px', fontSize: 45}} />
+      </Button>
     </div>
+    
   )
 }

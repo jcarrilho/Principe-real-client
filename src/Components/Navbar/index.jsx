@@ -11,7 +11,7 @@ import Slide from '@mui/material/Slide';
 import Button from '@mui/material/Button';
 import { Container } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Link as ScrollLink } from 'react-scroll';
 import './index.css'
 
@@ -36,31 +36,43 @@ HideOnScroll.propTypes = {
 
 export default function HideAppBar(props) {
 
+    const location = useLocation()
+
     return (
         <React.Fragment>
             <CssBaseline />
             <HideOnScroll {...props}>
 
-                <AppBar sx={{ backgroundColor: '#8a8f8f', }}>
+                <AppBar sx={{ backgroundColor: ' #ffbcff' }}>
                     <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Link to="/">
                             <img src='Pe+ºas individuais principe+real/Logo + Simbolos/logo 1.png' style={{ width: '150px', height: 'auto', filter: 'brightness(0) invert(1)' }} />
+                            </Link>
                         </Typography>
                         <Link to="/">
-                            <Button id="navbar-btn">Home</Button>
+                            {location.pathname !== '/' && <Button id="navbar-btn">Home</Button>}
                         </Link>
+                        {location.pathname === '/' &&
+                        <> 
                         <ScrollLink to="about" smooth={true} duration={50}>
                             <Button id="navbar-btn">About Us</Button>
-                        </ScrollLink>
-                        <ScrollLink to="marketplace" smooth={true} duration={50}>
-                            <Button id="navbar-btn">MarketPlace</Button>
                         </ScrollLink>
                         <ScrollLink to="neighborhood" smooth={true} duration={50}>
                             <Button id="navbar-btn">Neighborhood</Button>
                         </ScrollLink>
-                        <Link to="/login">
+                        <ScrollLink to="marketplace" smooth={true} duration={50}>
+                            <Button id="navbar-btn">MarketPlace</Button>
+                        </ScrollLink>
+                        </>                    
+                        }    
+
+
+                        {location.pathname !== '/login' && <Link to="/login">
                             <Button id="navbar-btn">Login</Button>
-                        </Link>
+                        </Link>}
+
+                       
                         <Link to="/signup">
                             <Button id="navbar-btn">Sign Up</Button>
                         </Link>

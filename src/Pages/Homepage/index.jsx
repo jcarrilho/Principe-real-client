@@ -15,6 +15,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea, CardActions } from '@mui/material';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 
 
@@ -99,37 +104,67 @@ function Homepage() {
                 id="about"
                 sx={{
                     height: '90vh',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
                     my: 2,
-                    color: 'rgba(255, 255, 255, 1.0)',
                     display: 'flex',
-                    flexDirection: 'column',
+                    flexDirection: 'row',
                     justifyContent: 'space-around',
                     alignItems: 'center',
-                    textAlign: 'center'
-
+                    color: 'rgba(0, 0, 0, 0.5)'
                 }}>
 
-                <Typography variant='h2'>Sobre Nós</Typography>
-                <Typography variant='body1'>
-                    Nascida em 2021, a nossa Associação foi criada para promover uma cultura comunitária que potencia todo o potencial do bairro do Príncipe Real, em Lisboa.
-                    Criamos e promovemos sinergias entre os vários intervenientes do bairro, como residentes, partes interessadas, proprietários de lojas, entidades públicas e todos aqueles que têm uma ligação direta ou indireta à nossa área - Príncipe Real.
-                    É uma associação sem fins lucrativos regida por direito privado, com personalidade jurídica. Queremos contribuir para a qualidade de vida no Príncipe Real, preservando a sua essência e características tão singulares.
-                </Typography>
-                <Typography variant='body1'>
-                    Queremos potenciar as dinâmicas comunitárias do bairro, cruzando atividades, interesses e necessidades.
-                    Criar novas relações entre aqueles que aqui vivem, trabalham, as instituições e o comércio local, numa sinergia criativa e familiar. Queremos conhecer a todos.
-                    Recuperar histórias de vida.
-                    Resgatar as histórias do bairro.
-                    Proteger os mais vulneráveis.
-                    Ser uma voz de ligação com as várias entidades oficiais.
-                </Typography>
-                <Typography variant='body1'>
-                    A Príncipe + Real será também uma plataforma de comunicação. Daremos a conhecer toda a riqueza, diversidade e atividade do bairro.
-                    Faremos essa comunicação na página do Instagram e através de publicidade nas ruas.
-                </Typography>
+                <Box sx={{
+                    textAlign: 'center',
+                    width: '650px',
+                }}>
+                    <Typography variant='body1'>
+                        <Typography variant='h2'>Sobre Nós</Typography>
+                        Nascida em 2021, a nossa Associação foi criada para promover uma cultura comunitária que potencia todo o potencial do bairro do Príncipe Real, em Lisboa.
+                        Criamos e promovemos sinergias entre os vários intervenientes do bairro, como residentes, partes interessadas, proprietários de lojas, entidades públicas e todos aqueles que têm uma ligação direta ou indireta à nossa área - Príncipe Real.
+                        <br />
+                        <br />
+                        É uma associação sem fins lucrativos regida por direito privado, com personalidade jurídica. Queremos contribuir para a qualidade de vida no Príncipe Real, preservando a sua essência e características tão singulares.
+                        Queremos potenciar as dinâmicas comunitárias do bairro, cruzando atividades, interesses e necessidades.
+                        Criar novas relações entre aqueles que aqui vivem, trabalham, as instituições e o comércio local, numa sinergia criativa e familiar.
+                        <br />
+                        <br />
+                        Queremos conhecer a todos.
+                        Recuperar histórias de vida.
+                        Resgatar as histórias do bairro.
+                        Proteger os mais vulneráveis.
+                        Ser uma voz de ligação com as várias entidades oficiais.
+                        A Príncipe + Real será também uma plataforma de comunicação. Daremos a conhecer toda a riqueza, diversidade e atividade do bairro.
+                        Faremos essa comunicação na página do Instagram e através de publicidade nas ruas.
+                    </Typography>
+                </Box>
+                <Paper elevation={12} sx={{ borderRadius: 3 }}>
+                    <Link to="https://amensagem.pt/2021/10/08/unir-a-vizinhanca-bairro-turismo-de-lisboa-principe-real/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                        <Card id='card1' sx={{
+                            maxWidth: 345,
+                            height: 500,
+                            borderRadius: 3
+                        }}>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    height="240"
+                                    image="public/Images/about-img.jpg"
+                                    alt="green iguana"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        UNIR A VIZINHANÇA NUM DOS BAIRROS MAIS TURÍSTICOS DE LISBOA
+                                    </Typography>
+                                    <Typography color="text.secondary">
+                                    A “Príncipe + Real” não é uma associação de comerciantes, nem de moradores. É, sim, uma associação que tem como objetivo criar uma comunidade de bairro, num lugar em plena gentrificação.
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Link>
+                </Paper>
             </Box>
-            
+
             <Box
                 id="neighborhood"
                 sx={{
@@ -145,7 +180,7 @@ function Homepage() {
                     my: 2
                 }}>
                     <Paper elevation={12} sx={{ borderRadius: 3 }}>
-                        <Link to="https://lisboasecreta.co/10-sitios-principe-real/" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
+                        <Link to="https://lisboasecreta.co/10-sitios-principe-real/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                             <Card id='card1' sx={{
                                 maxWidth: 345,
                                 height: 450,
@@ -162,7 +197,7 @@ function Homepage() {
                                         <Typography gutterBottom variant="h5" component="div">
                                             10 SÍTIOS IMPERDÍVEIS NO PRÍNCIPE REAL
                                         </Typography>
-                                        <Typography  color="text.secondary">
+                                        <Typography color="text.secondary">
                                             O Príncipe Real está cheio de coisas para ver, fazer... comer e beber. Acompanha-nos nesta viagem fantástica por este típico bairro lisboeta.
                                         </Typography>
                                     </CardContent>
@@ -172,7 +207,7 @@ function Homepage() {
                     </Paper>
 
                     <Paper elevation={12} sx={{ borderRadius: 3 }}>
-                        <Link to="https://www.timeout.pt/lisboa/pt/compras/as-melhores-lojas-no-principe-real" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
+                        <Link to="https://www.timeout.pt/lisboa/pt/compras/as-melhores-lojas-no-principe-real" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                             <Card sx={{
                                 maxWidth: 345,
                                 height: 450,
@@ -199,7 +234,7 @@ function Homepage() {
                     </Paper>
 
                     <Paper elevation={12} sx={{ borderRadius: 3 }}>
-                        <Link to="https://descubralisboa.com/principe-real-em-lisboa/" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
+                        <Link to="https://descubralisboa.com/principe-real-em-lisboa/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                             <Card sx={{
                                 maxWidth: 345,
                                 height: 450,

@@ -2,7 +2,7 @@
 
 import './App.css'
 import HideAppBar from './Components/Navbar';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import MarketplacePage from './Pages/MarketplacePage';
 import Homepage from './Pages/Homepage';
 import NeighborhoodPage from './Pages/NeighborhoodPage';
@@ -18,11 +18,11 @@ function App() {
       <HideAppBar />
       <Routes>
         <Route path='/' element={<Homepage />} />
-        <Route path='/marketplace' element={<MarketplacePage/>} />
+        <Route path='/marketplace' element={<MarketplacePage />} />
         <Route path='/neighborhood' element={<NeighborhoodPage />} />
         <Route path='/signup' element={<SignupPage />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </Container>
 
   )
