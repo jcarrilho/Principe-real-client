@@ -19,6 +19,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import './index.css'
 
 
 
@@ -62,7 +63,7 @@ function Homepage() {
                         width: '250px',
                         margin: 'auto',
                     }} /> */}
-                <Carousel style={{ width: '90%' }}>
+                <Carousel style={{ width: '90%' }} interval={3000}>
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -98,23 +99,23 @@ function Homepage() {
                     </Carousel.Item>
                     {/* Add more Carousel.Item components as needed */}
                 </Carousel>
-
             </Box>
+
             <Box
                 id="about"
                 sx={{
-                    height: '90vh',
+                    height: '80vh',
                     // backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    my: 2,
                     display: 'flex',
                     flexDirection: 'row',
-                    justifyContent: 'space-around',
+                    justifyContent: 'space-between',
                     alignItems: 'center',
-                    color: 'rgba(0, 0, 0, 0.5)'
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    position: 'relative',
                 }}>
 
                 <Box sx={{
-                    textAlign: 'center',
+                    textAlign: 'left',
                     width: '650px',
                 }}>
                     <Typography variant='body1'>
@@ -123,9 +124,8 @@ function Homepage() {
                         Criamos e promovemos sinergias entre os vários intervenientes do bairro, como residentes, partes interessadas, proprietários de lojas, entidades públicas e todos aqueles que têm uma ligação direta ou indireta à nossa área - Príncipe Real.
                         <br />
                         <br />
-                        É uma associação sem fins lucrativos regida por direito privado, com personalidade jurídica. Queremos contribuir para a qualidade de vida no Príncipe Real, preservando a sua essência e características tão singulares.
-                        Queremos potenciar as dinâmicas comunitárias do bairro, cruzando atividades, interesses e necessidades.
-                        Criar novas relações entre aqueles que aqui vivem, trabalham, as instituições e o comércio local, numa sinergia criativa e familiar.
+                        Somos uma associação sem fins lucrativos regida por direito privado, com personalidade jurídica. Queremos contribuir para a qualidade de vida no Príncipe Real, preservando a sua essência e características tão singulares.
+                        Potenciar as dinâmicas comunitárias do bairro, cruzando atividades, interesses e necessidades são alguns dos nossos objetivos. Assim como criar novas relações entre aqueles que aqui vivem, trabalham, as instituições e o comércio local, numa sinergia criativa e familiar.
                         <br />
                         <br />
                         Queremos conhecer a todos.
@@ -155,23 +155,48 @@ function Homepage() {
                                     <Typography gutterBottom variant="h5" component="div">
                                         UNIR A VIZINHANÇA NUM DOS BAIRROS MAIS TURÍSTICOS DE LISBOA
                                     </Typography>
-                                    <Typography color="text.secondary">
-                                    A “Príncipe + Real” não é uma associação de comerciantes, nem de moradores. É, sim, uma associação que tem como objetivo criar uma comunidade de bairro, num lugar em plena gentrificação.
+                                    <Typography color="text.secondary" sx={{ fontSize: 14 }}>
+                                        “Não é uma associação de comerciantes, mas também não é de moradores. A ideia não é servir nenhum interesse específico, é sentir que todos pertencemos ao bairro e que, em conjunto, vale a pena entrarmos em diálogo” - Patícia Luz, da Associação Príncipe + Real.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
                     </Link>
                 </Paper>
+                <div style={{
+                    position: 'absolute',
+                    bottom: '0',
+                    width: '100vw',
+                    margin: 'auto',
+                    left: 'calc(-50vw + 49%)',
+                    zIndex: '-1',
+                }}>
+                    <div className="wave-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffa9ff" fillOpacity="1" d="M0,160L48,181.3C96,203,192,245,288,224C384,203,480,117,576,101.3C672,85,768,139,864,144C960,149,1056,107,1152,85.3C1248,64,1344,64,1392,64L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+                    </div>
+                </div>
             </Box>
 
             <Box
                 id="neighborhood"
                 sx={{
                     height: '80vh',
-                    backgroundColor: 'rgb(255, 255, 255)',
-                    my: 2,
+                    // my: 2,
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    position: 'relative',
                 }}>
+                <div style={{
+                    position: 'absolute',
+                    width: '100vw',
+                    margin: 'auto',
+                    left: 'calc(-50vw + 49%)',
+                    zIndex: '-1',
+
+                }}>
+                    <div className="wave-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffa9ff" fillOpacity="1" d="M0,224L48,197.3C96,171,192,117,288,128C384,139,480,213,576,224C672,235,768,181,864,144C960,107,1056,85,1152,85.3C1248,85,1344,107,1392,117.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
+                    </div>
+                </div>
                 <Typography variant='h3'>SOBRE O BAIRRO</Typography>
                 <Box sx={{
                     display: 'flex',
@@ -261,21 +286,95 @@ function Homepage() {
                     </Paper>
                 </Box>
             </Box>
+
             <Box
                 id="marketplace"
                 sx={{
-                    height: '90vh',
-                    backgroundColor: 'rgba(154, 207, 255, 1.0)',
-                    my: 2
+                    height: '60vh',
+                    my: 2,
+                    display: 'flex',
+                    flexDirection: 'row-reverse',
+                    alignItems: 'flex-start',
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    position: 'relative'
+                }}
+            >
+                <Box sx={{
+                    textAlign: 'right',
+                    width: '600px',
                 }}>
-                <Typography variant='h6'>market place</Typography>
-                <Link to='/marketplace'>
-                    <Button id='navbar-btn'>MarketPlace</Button>
-                </Link>
+                    <Typography variant='body1'>
+                        <Typography variant='h2'>Marketplace</Typography>
+                        Welcome to our Marketplace! Here, you have the opportunity to showcase your services on our website and reach a wider audience. Our platform allows you to create a listing for your services, providing a detailed description and other relevant information.
+                        <br />
+                        <br />
+                        By joining our Marketplace, you can connect with potential clients and grow your business. Whether you offer professional services, creative solutions, or specialized expertise, our community is eager to discover what you have to offer.
+                        <br />
+                        <br />
+                    </Typography>
+
+                    <Link to='/marketplace'>
+                        <Button>Marketplace</Button>
+                    </Link>
+                </Box>
+
+
             </Box>
 
+            {/* <Box
+                id="marketplace"
+                sx={{
+                    height: '90vh',
+                    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    my: 2,
+                    display: 'flex',
+                    flexDirection: 'row-reverse',
+                    // justifyContent: 'space-around',
+                    alignItems: 'flex-start',
+                    color: 'rgba(0, 0, 0, 0.5)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                }}>
+                <Box sx={{
+                    textAlign: 'right',
+                    width: '600px',
+                    zIndex: 1,
+                    position: 'relative'
+                }}>
+                    <Typography variant='body1'>
+                        <Typography variant='h2'>Marketplace</Typography>
+                        Welcome to our Marketplace! Here, you have the opportunity to showcase your services on our website and reach a wider audience. Our platform allows you to create a listing for your services, providing a detailed description and other relevant information.
+                        <br />
+                        <br />
+                        By joining our Marketplace, you can connect with potential clients and grow your business. Whether you offer professional services, creative solutions, or specialized expertise, our community is eager to discover what you have to offer.
+                        <br />
+                        <br />
+                    </Typography>
 
-            <hr />
+                    <Link to='/marketplace'>
+                        <Button >MarketPlace</Button>
+                    </Link>
+                </Box>
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        zIndex: 0,
+                    }}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                        <path
+                            fill="#ffbcff"
+                            fillOpacity="1"
+                            d="M0,320L48,293.3C96,267,192,213,288,170.7C384,128,480,96,576,85.3C672,75,768,85,864,106.7C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                        ></path>
+                    </svg>
+                </Box>
+            </Box> */}
+
 
 
             <Zoom in={showButton}>
@@ -294,8 +393,8 @@ function Homepage() {
                 </Fab>
             </Zoom>
 
-        </div>
+        </div >
     )
 }
 
-export default Homepage
+export default Homepage;

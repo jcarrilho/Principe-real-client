@@ -9,6 +9,7 @@ import NeighborhoodPage from './Pages/NeighborhoodPage';
 import { Container } from '@mui/material';
 import SignupPage from './Pages/SignupPage';
 import Footer from './Components/Footer';
+import LoginPage from './Pages/Homepage/LoginPage';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/marketplace' element={<MarketplacePage />} />
         <Route path='/neighborhood' element={<NeighborhoodPage />} />
         <Route path='/signup' element={<SignupPage />} />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
       <Footer />
     </Container>
