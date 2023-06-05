@@ -9,7 +9,7 @@ import NeighborhoodPage from './Pages/NeighborhoodPage';
 import { Container } from '@mui/material';
 import SignupPage from './Pages/SignupPage';
 import Footer from './Components/Footer';
-import LoginPage from './Pages/Homepage/LoginPage';
+import LoginPage from './Pages/LoginPage';
 
 
 function App() {

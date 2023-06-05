@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/auth.context';
 
 const API_URL = 'http://localhost:5005';
 
@@ -14,6 +15,8 @@ export default function LoginPage() {
   const [successMessage, setSuccessMessage] = useState('');
 
   const navigate = useNavigate();
+
+  const {storeToken, authenticateUser} = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,9 +30,10 @@ export default function LoginPage() {
       .post(`${API_URL}/auth/login`, { email, password })
       .then((response) => {
         // Saves JWT to localStorage
-        localStorage.setItem('token', response.data.token);
+        storeToken(response.data.authToken);
         setSuccessMessage('Login successful! Redirecting...');
-        setTimeout(() => navigate('/marketplace'), 2000); 
+        authenticateUser();
+        setTimeout(() => navigate('/'), 2000); 
       })
       .catch((error) => {
         setErrorMessage('An error occurred or invalid credentials. Please try again.');

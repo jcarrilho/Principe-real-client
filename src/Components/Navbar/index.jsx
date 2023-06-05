@@ -43,7 +43,7 @@ export default function HideAppBar(props) {
             <CssBaseline />
             <HideOnScroll {...props}>
 
-                <AppBar sx={{ backgroundColor: ' #66a29e' }}>
+                <AppBar sx={{ backgroundColor: '#91d1cf', boxShadow: 'none' }}>
                     <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         <Link to="/">

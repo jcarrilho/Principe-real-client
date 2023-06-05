@@ -1,6 +1,7 @@
 #navbar-btn {
     color: white;
     padding: 0 8px;
+    
 }
 #navbar-btn:hover {
     transform: translateY(-0.250rem);
