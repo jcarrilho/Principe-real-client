@@ -341,62 +341,6 @@ function Homepage() {
 
             </Box>
 
-            {/* <Box
-                id="marketplace"
-                sx={{
-                    height: '90vh',
-                    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    my: 2,
-                    display: 'flex',
-                    flexDirection: 'row-reverse',
-                    // justifyContent: 'space-around',
-                    alignItems: 'flex-start',
-                    color: 'rgba(0, 0, 0, 0.5)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                }}>
-                <Box sx={{
-                    textAlign: 'right',
-                    width: '600px',
-                    zIndex: 1,
-                    position: 'relative'
-                }}>
-                    <Typography variant='body1'>
-                        <Typography variant='h2'>Marketplace</Typography>
-                        Welcome to our Marketplace! Here, you have the opportunity to showcase your services on our website and reach a wider audience. Our platform allows you to create a listing for your services, providing a detailed description and other relevant information.
-                        <br />
-                        <br />
-                        By joining our Marketplace, you can connect with potential clients and grow your business. Whether you offer professional services, creative solutions, or specialized expertise, our community is eager to discover what you have to offer.
-                        <br />
-                        <br />
-                    </Typography>
-
-                    <Link to='/marketplace'>
-                        <Button >MarketPlace</Button>
-                    </Link>
-                </Box>
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        zIndex: 0,
-                    }}
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                        <path
-                            fill="#ffbcff"
-                            fillOpacity="1"
-                            d="M0,320L48,293.3C96,267,192,213,288,170.7C384,128,480,96,576,85.3C672,75,768,85,864,106.7C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-                        ></path>
-                    </svg>
-                </Box>
-            </Box> */}
-
-
-
             <Zoom in={showButton}>
                 <Fab
                     color="rgba(255, 188, 255)"
@@ -414,6 +358,7 @@ function Homepage() {
             </Zoom>
 
         </div >
+        
     )
 }
 
