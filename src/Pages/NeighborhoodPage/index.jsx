@@ -68,7 +68,7 @@ export default function NeighborhoodPage() {
   }, [])
 
   return (
-    <div id=' news-wrap'>
+    <div id='news-wrap'>
       { news.map((news) => {
         const deleteNews = (newsId) => {
           axios.delete(`${API_URL}/api/news/${newsId}`)
