@@ -8,8 +8,9 @@ import Homepage from './Pages/Homepage';
 import NeighborhoodPage from './Pages/NeighborhoodPage';
 import { Container } from '@mui/material';
 import SignupPage from './Pages/SignupPage';
-// import Footer from './Components/Footer';
+import Footer from './Components/Footer';
 import LoginPage from './Pages/LoginPage';
+import ProfilePage from './Pages/ProfilePage';
 
 
 function App() {
@@ -23,8 +24,9 @@ function App() {
         <Route path='/neighborhood' element={<NeighborhoodPage />} />
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
       </Routes>
-      {/* <Footer /> */}
+     <Footer />
     </Container>
 
   )

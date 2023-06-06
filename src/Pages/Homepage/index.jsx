@@ -65,7 +65,7 @@ function Homepage() {
                         <path fill="#91d1cf"
                             fillOpacity="1"
                             d="M0,192L48,208C96,224,192,256,288,234.7C384,213,480,139,576,122.7C672,107,768,149,864,176C960,203,1056,213,1152,213.3C1248,213,1344,203,1392,197.3L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-                           
+
                         ></path>
                     </svg>
                 </div>
@@ -79,10 +79,29 @@ function Homepage() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    position: 'relative'
-                }}>
+                    position: 'relative',
+                }}
+            >
 
-                <Carousel style={{ width: '90%' }} interval={3000}>
+
+
+                <Carousel style={{ width: '90%',
+                "&[data-aos='fade-up']": {
+                        animation: "fade-up-animation 1s ease-in-out",
+                    },
+                    "@keyframes fade-up-animation": {
+                        "0%": {
+                            opacity: 0,
+                            transform: "translateY(20px)",
+                        },
+                        "100%": {
+                            opacity: 1,
+                            transform: "translateY(0)",
+                        },
+                    },
+                }}
+                data-aos="fade-in" data-aos-duration="2000"
+                  interval={3000}>
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -113,7 +132,7 @@ function Homepage() {
             <Box
                 id="about"
                 sx={{
-                    height: '80vh',
+                    height: '100vh',
                     // backgroundColor: 'rgba(0, 0, 0, 0.5)',
                     display: 'flex',
                     flexDirection: 'row',
@@ -121,12 +140,29 @@ function Homepage() {
                     alignItems: 'center',
                     color: 'rgba(0, 0, 0, 0.6)',
                     position: 'relative',
-                }}>
+                }}
+
+
+            >
 
                 <Box sx={{
                     textAlign: 'left',
                     width: '650px',
-                }}>
+                    "&[data-aos='fade-up']": {
+                        animation: "fade-up-animation 1s ease-in-out",
+                    },
+                    "@keyframes fade-up-animation": {
+                        "0%": {
+                            opacity: 0,
+                            transform: "translateY(20px)",
+                        },
+                        "100%": {
+                            opacity: 1,
+                            transform: "translateY(0)",
+                        },
+                    },
+                }}
+                data-aos="fade-right">
                     <Typography variant='body1'>
                         <Typography variant='h2' >Sobre Nós</Typography>
                         Nascida em 2021, a nossa Associação foi criada para promover uma cultura comunitária que potencia todo o potencial do bairro do Príncipe Real, em Lisboa.
@@ -146,7 +182,22 @@ function Homepage() {
                         Faremos essa comunicação na página do Instagram e através de publicidade nas ruas.
                     </Typography>
                 </Box>
-                <Paper elevation={12} sx={{ borderRadius: 3 }}>
+                <Paper elevation={12} sx={{ borderRadius: 3,
+                "&[data-aos='fade-up']": {
+                        animation: "fade-up-animation 1s ease-in-out",
+                    },
+                    "@keyframes fade-up-animation": {
+                        "0%": {
+                            opacity: 0,
+                            transform: "translateY(20px)",
+                        },
+                        "100%": {
+                            opacity: 1,
+                            transform: "translateY(0)",
+                        },
+                    },
+                }}
+                data-aos="fade-left" >
                     <Link to="https://amensagem.pt/2021/10/08/unir-a-vizinhanca-bairro-turismo-de-lisboa-principe-real/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                         <Card id='card1' sx={{
                             maxWidth: 345,
@@ -200,110 +251,151 @@ function Homepage() {
             <Box
                 id="neighborhood"
                 sx={{
-                    height: '80vh',
+                    height: '100vh',
                     // my: 2,
                     color: 'rgba(0, 0, 0, 0.6)',
                     position: 'relative',
-                }}>
+                }}
+            >
                 <div style={{
                     position: 'absolute',
                     width: '100vw',
                     margin: 'auto',
                     left: 'calc(-50vw + 49%)',
                     zIndex: '-1',
+                }}
 
-                }}>
+                >
                     <div className="wave-container">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className='svg-scroll'><path fill="#91d1cf" fillOpacity="1" d="M0,224L48,197.3C96,171,192,117,288,128C384,139,480,213,576,224C672,235,768,181,864,144C960,107,1056,85,1152,85.3C1248,85,1344,107,1392,117.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
                     </div>
                 </div>
-                <Typography variant='h3'>SOBRE O BAIRRO</Typography>
+                <Typography variant='h3' sx={{
+                    "&[data-aos='fade-up']": {
+                        animation: "fade-up-animation 1s ease-in-out",
+                    },
+                    "@keyframes fade-up-animation": {
+                        "0%": {
+                            opacity: 0,
+                            transform: "translateY(20px)",
+                        },
+                        "100%": {
+                            opacity: 1,
+                            transform: "translateY(0)",
+                        },
+                    },
+                }}
+                data-aos="fade-up"
+                >SOBRE O BAIRRO</Typography>
                 <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    my: 2
+                    // display: 'flex',
+                    // flexDirection: 'row',
+                    // justifyContent: 'space-between',
+                    // my: 2
                 }}>
-                    <Paper elevation={12} sx={{ borderRadius: 3 }}>
-                        <Link to="https://lisboasecreta.co/10-sitios-principe-real/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                            <Card id='card1' sx={{
-                                maxWidth: 345,
-                                height: 450,
-                                borderRadius: 3
-                            }}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        component="img"
-                                        height="240"
-                                        image="public/Images/sobre-img1.jpg"
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            10 SÍTIOS IMPERDÍVEIS NO PRÍNCIPE REAL
-                                        </Typography>
-                                        <Typography color="text.secondary">
-                                            O Príncipe Real está cheio de coisas para ver, fazer... comer e beber. Acompanha-nos nesta viagem fantástica por este típico bairro lisboeta.
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Link>
-                    </Paper>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        my: 2,
+                        "&[data-aos='fade-up']": {
+                            animation: "fade-up-animation 1s ease-in-out",
+                        },
+                        "@keyframes fade-up-animation": {
+                            "0%": {
+                                opacity: 0,
+                                transform: "translateY(20px)",
+                            },
+                            "100%": {
+                                opacity: 1,
+                                transform: "translateY(0)",
+                            },
+                        },
+                    }}
+                        data-aos="fade-up" >
+                        <Paper elevation={12} sx={{
+                            borderRadius: 3,
+                        }}>
+                            <Link to="https://lisboasecreta.co/10-sitios-principe-real/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                                <Card id='card1' sx={{
+                                    maxWidth: 345,
+                                    height: 450,
+                                    borderRadius: 3
+                                }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component="img"
+                                            height="240"
+                                            image="public/Images/sobre-img1.jpg"
+                                            alt="green iguana"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                10 SÍTIOS IMPERDÍVEIS NO PRÍNCIPE REAL
+                                            </Typography>
+                                            <Typography color="text.secondary">
+                                                O Príncipe Real está cheio de coisas para ver, fazer... comer e beber. Acompanha-nos nesta viagem fantástica por este típico bairro lisboeta.
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Link>
+                        </Paper>
 
-                    <Paper elevation={12} sx={{ borderRadius: 3 }}>
-                        <Link to="https://www.timeout.pt/lisboa/pt/compras/as-melhores-lojas-no-principe-real" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                            <Card sx={{
-                                maxWidth: 345,
-                                height: 450,
-                                borderRadius: 3
-                            }}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        component="img"
-                                        height="240"
-                                        image="public/Images/sobre-img2.jpg"
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            COMPRAS EM LISBOA: AS MELHORES LOJAS NO PRÍNCIPE REAL
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Há que ter a carteira bem recheada para andar às compras por estes lados. É que as melhores lojas do Príncipe Real são dignas de realeza.
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Link>
-                    </Paper>
+                        <Paper elevation={12} sx={{ borderRadius: 3 }}>
+                            <Link to="https://www.timeout.pt/lisboa/pt/compras/as-melhores-lojas-no-principe-real" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                                <Card sx={{
+                                    maxWidth: 345,
+                                    height: 450,
+                                    borderRadius: 3
+                                }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component="img"
+                                            height="240"
+                                            image="public/Images/sobre-img2.jpg"
+                                            alt="green iguana"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                COMPRAS EM LISBOA: AS MELHORES LOJAS NO PRÍNCIPE REAL
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                Há que ter a carteira bem recheada para andar às compras por estes lados. É que as melhores lojas do Príncipe Real são dignas de realeza.
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Link>
+                        </Paper>
 
-                    <Paper elevation={12} sx={{ borderRadius: 3 }}>
-                        <Link to="https://descubralisboa.com/principe-real-em-lisboa/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                            <Card sx={{
-                                maxWidth: 345,
-                                height: 450,
-                                borderRadius: 3
-                            }}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        component="img"
-                                        height="240"
-                                        image="public/Images/sobre-img3.jpg"
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            PRÍNCIPE REAL: O QUE VISITAR NO BAIRRO LISBOETA
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Repleto de prédios tradicionais portugueses, este simpático bairro lisboeta nos últimos anos atraiu diversas lojas, restaurantes e bares com apostas mais modernas e diferentes.
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Link>
-                    </Paper>
+                        <Paper elevation={12} sx={{ borderRadius: 3 }}>
+                            <Link to="https://descubralisboa.com/principe-real-em-lisboa/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                                <Card sx={{
+                                    maxWidth: 345,
+                                    height: 450,
+                                    borderRadius: 3
+                                }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component="img"
+                                            height="240"
+                                            image="public/Images/sobre-img3.jpg"
+                                            alt="green iguana"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                PRÍNCIPE REAL: O QUE VISITAR NO BAIRRO LISBOETA
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                Repleto de prédios tradicionais portugueses, este simpático bairro lisboeta nos últimos anos atraiu diversas lojas, restaurantes e bares com apostas mais modernas e diferentes.
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Link>
+                        </Paper>
+                    </Box>
                 </Box>
             </Box>
 
@@ -316,8 +408,23 @@ function Homepage() {
                     flexDirection: 'row-reverse',
                     alignItems: 'flex-start',
                     color: 'rgba(0, 0, 0, 0.6)',
-                    position: 'relative'
-                }}
+                    position: 'relative',
+                    "&[data-aos='fade-up']": {
+                            animation: "fade-up-animation 1s ease-in-out",
+                        },
+                        "@keyframes fade-up-animation": {
+                            "0%": {
+                                opacity: 0,
+                                transform: "translateY(20px)",
+                            },
+                            "100%": {
+                                opacity: 1,
+                                transform: "translateY(0)",
+                            },
+                        },
+                    }}
+                        data-aos="fade-left"
+                
             >
                 <Box sx={{
                     textAlign: 'right',
@@ -357,8 +464,9 @@ function Homepage() {
                 </Fab>
             </Zoom>
 
+
         </div >
-        
+
     )
 }
 

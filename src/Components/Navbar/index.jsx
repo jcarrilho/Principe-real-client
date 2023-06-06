@@ -76,6 +76,9 @@ export default function HideAppBar(props) {
                         <Link to="/signup">
                             <Button id="navbar-btn">Sign Up</Button>
                         </Link>
+                        <Link to="/profile">
+                            <Button id="navbar-btn">Profile</Button>
+                        </Link>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
