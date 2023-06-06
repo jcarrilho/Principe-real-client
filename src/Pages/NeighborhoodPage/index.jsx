@@ -1,127 +1,208 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import Paper from '@mui/material/Paper';
+import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea, CardActions } from '@mui/material';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
+import { Box, Button, CardActionArea, CardActions } from '@mui/material';
+import axios from 'axios';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../Context/auth.context';
+import Paper from '@mui/material/Paper';
+// import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, FormControl, Select, MenuItem, InputLabel } from '@mui/material';
+import Slide from '@mui/material/Slide';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import NavigationIcon from '@mui/icons-material/Navigation';
+import Tooltip from '@mui/material/Tooltip';
+import './index.css'
 
-function NeighborhoodPage() {
-    // Write state. By default it'll be null because we don't have it yet
 
-  return (
-    <Box
-                id="neighborhood"
-                sx={{
-                    height: '80vh',
-                    // my: 2,
-                    color: 'rgba(0, 0, 0, 0.6)',
-                    position: 'relative',
-                }}>
-                <div style={{
-                    position: 'absolute',
-                    width: '100vw',
-                    margin: 'auto',
-                    left: 'calc(-50vw + 49%)',
-                    zIndex: '-1',
 
-                }}>
-                    <div className="wave-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className='svg-scroll'><path fill="#91d1cf" fillOpacity="1" d="M0,224L48,197.3C96,171,192,117,288,128C384,139,480,213,576,224C672,235,768,181,864,144C960,107,1056,85,1152,85.3C1248,85,1344,107,1392,117.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
-                    </div>
-                </div>
-                <Typography variant='h3'>SOBRE O BAIRRO</Typography>
-                <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    my: 2
-                }}>
-                    <Paper elevation={12} sx={{ borderRadius: 3 }}>
-                        <Link to="https://lisboasecreta.co/10-sitios-principe-real/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                            <Card id='card1' sx={{
-                                maxWidth: 345,
-                                height: 450,
-                                borderRadius: 3
-                            }}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        component="img"
-                                        height="240"
-                                        image="public/Images/sobre-img1.jpg"
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            10 SÍTIOS IMPERDÍVEIS NO PRÍNCIPE REAL
-                                        </Typography>
-                                        <Typography color="text.secondary">
-                                            O Príncipe Real está cheio de coisas para ver, fazer... comer e beber. Acompanha-nos nesta viagem fantástica por este típico bairro lisboeta.
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Link>
-                    </Paper>
 
-                    <Paper elevation={12} sx={{ borderRadius: 3 }}>
-                        <Link to="https://www.timeout.pt/lisboa/pt/compras/as-melhores-lojas-no-principe-real" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                            <Card sx={{
-                                maxWidth: 345,
-                                height: 450,
-                                borderRadius: 3
-                            }}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        component="img"
-                                        height="240"
-                                        image="public/Images/sobre-img2.jpg"
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            COMPRAS EM LISBOA: AS MELHORES LOJAS NO PRÍNCIPE REAL
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Há que ter a carteira bem recheada para andar às compras por estes lados. É que as melhores lojas do Príncipe Real são dignas de realeza.
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Link>
-                    </Paper>
+const API_URL = 'http://localhost:5005'
 
-                    <Paper elevation={12} sx={{ borderRadius: 3 }}>
-                        <Link to="https://descubralisboa.com/principe-real-em-lisboa/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                            <Card sx={{
-                                maxWidth: 345,
-                                height: 450,
-                                borderRadius: 3
-                            }}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        component="img"
-                                        height="240"
-                                        image="public/Images/sobre-img3.jpg"
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            PRÍNCIPE REAL: O QUE VISITAR NO BAIRRO LISBOETA
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Repleto de prédios tradicionais portugueses, este simpático bairro lisboeta nos últimos anos atraiu diversas lojas, restaurantes e bares com apostas mais modernas e diferentes.
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Link>
-                    </Paper>
-                </Box>
-            </Box>
-  )
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const handleImageUpload = (event) => {
+  const file = event.target.files[0];
+  // Perform image upload logic here
+};
+
+
+export default function NeighborhoodPage() {
+
+  const [open, setOpen] = useState(false);
+  const {loggedIn, user} = useContext(AuthContext);
+
+  const handleClickOpen = () => {
+    if (loggedIn) {
+    setOpen(true);
+  } else {
+    alert('You must be logged in to create a service.')
+  }
 }
 
-export default NeighborhoodPage
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [news, setNews] = useState([]);
+
+  // function that gets  news via axios
+  const getAllNews = () => {
+    axios
+      .get(`${API_URL}/api/news`)
+      .then((response) => setNews(response.data))
+      .catch((error) => console.log(error))
+  };
+
+  useEffect(() => {
+    getAllNews()
+  }, [])
+
+  return (
+    <div id=' news-wrap'>
+      { news.map((news) => {
+        const deleteNews = (newsId) => {
+          axios.delete(`${API_URL}/api/news/${newsId}`)
+            .then(() => {
+              // Service deleted successfully, you can perform any necessary actions
+              // such as updating the UI or displaying a success message.
+              getAllNews(); // Refresh the list of  news
+            })
+            .catch((error) => {
+              console.log(error);
+              // Handle the error case if the service deletion fails.
+            });
+
+          const updateNews = (newsId) => {
+            axios.update(`${API_URL}/api/news/${newsId}`)
+              .then(() => {
+                // Service deleted successfully, you can perform any necessary actions
+                // such as updating the UI or displaying a success message.
+                getAllNews(); // Refresh the list of  news
+              })
+              .catch((error) => {
+                console.log(error);
+                // Handle the error case if the service deletion fails.
+              })
+          };
+        };
+
+        return (
+          <div key={news._id}>
+            <Paper elevation={10} sx={{ borderRadius: 3 }}>
+              <Box>
+                <Card sx={{
+                  maxWidth: 345,
+                  mt: 4,
+                  borderRadius: 3,
+
+                }}>
+
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image="/Images/img1.jpg"
+                      alt="green iguana"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {news.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {news.description}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button onClick={() => deleteNews(news._id)} size="small" color="primary">
+                      Delete
+                    </Button>
+                    <Button onClick={handleClickOpen} size="small" color="primary">
+                      Edit
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Box>
+            </Paper>
+
+          </div>
+        )
+      })}
+
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"CREATE NEWS"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Welcome to our service posting platform! With this form, you can showcase your  news on our website. Once you submit the form, our admin team will review your submission and approve it for listing on our platform. We are excited to have you share your expertise with our community! 😀
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="title"
+            label="News Title"
+            fullWidth
+            required
+          />
+          <TextField
+            margin="dense"
+            id="description"
+            label="News Description"
+            fullWidth
+            multiline
+            rows={3}
+            inputProps={{ maxLength: 500 }}
+            required
+          />
+          <input
+            type="file"
+            accept="image/*"
+            id="image"
+            onChange={handleImageUpload}
+            required
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleClose}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
+
+
+      <Box sx={{ '& > :not(style)': { m: 1 }, position: 'fixed', right: 20, bottom: 10 }} onClick={handleClickOpen}>
+        <Tooltip
+          title="Create News"
+          placement="left"
+        >
+          <Box >
+            <Fab sx={{
+              backgroundColor: '#91d1cf',
+              '&:hover': {
+                backgroundColor: '#66a29e'
+              }
+            }} aria-label="add"
+            >
+              <AddIcon sx={{ color: 'white', fontSize: '32px' }} />
+            </Fab>
+          </Box>
+        </Tooltip>
+      </Box>
+    </div>
+
+  )
+}

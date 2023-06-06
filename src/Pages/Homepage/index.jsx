@@ -252,7 +252,7 @@ function Homepage() {
                 id="neighborhood"
                 sx={{
                     height: '100vh',
-                    // my: 2,
+                    my: 0,
                     color: 'rgba(0, 0, 0, 0.6)',
                     position: 'relative',
                 }}
@@ -291,13 +291,13 @@ function Homepage() {
                     // display: 'flex',
                     // flexDirection: 'row',
                     // justifyContent: 'space-between',
-                    // my: 2
+                    my: 2
                 }}>
                     <Box sx={{
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'space-between',
-                        my: 2,
+                        // my: 4,
                         "&[data-aos='fade-up']": {
                             animation: "fade-up-animation 1s ease-in-out",
                         },
@@ -397,7 +397,9 @@ function Homepage() {
                         </Paper>
                     </Box>
                 </Box>
-            </Box>
+                <Link to='/neighborhood'>
+                        <Button>See all News</Button>
+                    </Link>            </Box>
 
             <Box
                 id="marketplace"
