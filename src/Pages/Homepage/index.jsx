@@ -28,6 +28,7 @@ import './index.css'
 
 
 
+
 function Homepage() {
     const [showButton, setShowButton] = useState(false);
 
@@ -397,9 +398,7 @@ function Homepage() {
                         </Paper>
                     </Box>
                 </Box>
-                <Link to='/neighborhood'>
-                        <Button>See all News</Button>
-                    </Link>            </Box>
+                      </Box>
 
             <Box
                 id="marketplace"

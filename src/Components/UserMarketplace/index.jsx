@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import * as React from 'react';
@@ -9,6 +10,7 @@ import { Box, Button, CardActionArea, CardActions } from '@mui/material';
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../Context/auth.context';
+import '../../Pages/MarketplacePage/index.css';
 import Paper from '@mui/material/Paper';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, FormControl, Select, MenuItem, InputLabel } from '@mui/material';
@@ -19,75 +21,99 @@ import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import Tooltip from '@mui/material/Tooltip';
-import './index.css'
 
-
-
-
-const API_URL = 'http://localhost:5005'
+const API_URL = 'http://localhost:5005';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 
-const handleImageUpload = (event) => {
-  const file = event.target.files[0];
-  // Perform image upload logic here
-};
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    // Perform image upload logic here
+  };
+  
+
+function UserMarketPlace() {
+const [services, setServices] = useState([]);
+const [open, setOpen] = useState(false);
+const [title, setTitle] = useState('');
+const [description, setDescription] = useState('');
+const [contactNumber, setContactNumber] = useState('');
+const [image, setImage] = useState('');
+const [email, setEmail] = useState('');
+const [success, setSuccess] = useState(false);
+
+const { loggedIn, user } = useContext(AuthContext);
 
 
-export default function NeighborhoodPage() {
-
-  const [open, setOpen] = useState(false);
-  const {loggedIn, user} = useContext(AuthContext);
 
   const handleClickOpen = () => {
     if (loggedIn) {
-    setOpen(true);
-  } else {
-    alert('You must be logged in to create a service.')
+      setOpen(true);
+    } else {
+      alert('You must be logged in to create a service.')
+    }
   }
-}
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const [news, setNews] = useState([]);
+  const handleSubmit = () =>{
+    setSuccess(false);
+    let role = user.role;
+    let requestBody = {title, description, contactNumber, image, email, role}
+    axios.post(`${API_URL}/api/services`, requestBody)
+    .then(() => {
+      handleClose()
+      setTitle('');
+      setDescription('');
+      setContactNumber('');
+      setEmail('');
+      setImage('');
+      setSuccess(true);
+    }
+    )
+    .catch((error) => console.log(error)) 
+  }
 
-  // function that gets  news via axios
-  const getAllNews = () => {
+   // function that gets services via axios
+   const getAllServices = () => {
     axios
-      .get(`${API_URL}/api/news`)
-      .then((response) => setNews(response.data))
+      .get(`${API_URL}/api/services`)
+      .then((response) => setServices(response.data))
       .catch((error) => console.log(error))
   };
 
+
   useEffect(() => {
-    getAllNews()
-  }, [])
+    getAllServices()
+  }, [success])
+
 
   return (
-    <div id='news-wrap'>
-      { news.map((news) => {
-        const deleteNews = (newsId) => {
-          axios.delete(`${API_URL}/api/news/${newsId}`)
+    <div id='services-wrap'>
+       {services && services.map((service) => {
+        if(service.status=="approved"){
+        const deleteService = (serviceId) => {
+          axios.delete(`${API_URL}/api/services/${serviceId}`)
             .then(() => {
               // Service deleted successfully, you can perform any necessary actions
               // such as updating the UI or displaying a success message.
-              getAllNews(); // Refresh the list of  news
+              getAllServices(); // Refresh the list of services
             })
             .catch((error) => {
               console.log(error);
               // Handle the error case if the service deletion fails.
             });
 
-          const updateNews = (newsId) => {
-            axios.update(`${API_URL}/api/news/${newsId}`)
+          const updateService = (serviceId) => {
+            axios.update(`${API_URL}/api/services/${serviceId}`)
               .then(() => {
                 // Service deleted successfully, you can perform any necessary actions
                 // such as updating the UI or displaying a success message.
-                getAllNews(); // Refresh the list of  news
+                getAllServices(); // Refresh the list of services
               })
               .catch((error) => {
                 console.log(error);
@@ -97,7 +123,7 @@ export default function NeighborhoodPage() {
         };
 
         return (
-          <div key={news._id}>
+          <div key={service._id}>
             <Paper elevation={10} sx={{ borderRadius: 3 }}>
               <Box>
                 <Card sx={{
@@ -116,20 +142,18 @@ export default function NeighborhoodPage() {
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
-                        {news.title}
+                        {service.title}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        {news.description}
+                        {service.description}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
                   <CardActions>
-                    <Button onClick={() => deleteNews(news._id)} size="small" color="primary">
+                    <Button onClick={() => deleteService(service._id)} size="small" color="primary">
                       Delete
                     </Button>
-                    <Button onClick={handleClickOpen} size="small" color="primary">
-                      Edit
-                    </Button>
+                    
                   </CardActions>
                 </Card>
               </Box>
@@ -137,7 +161,7 @@ export default function NeighborhoodPage() {
 
           </div>
         )
-      })}
+      }}) }
 
       <Dialog
         open={open}
@@ -146,28 +170,57 @@ export default function NeighborhoodPage() {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"CREATE NEWS"}</DialogTitle>
+        <DialogTitle>{"CREATE A NEW SERVICE"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Welcome to our service posting platform! With this form, you can showcase your  news on our website. Once you submit the form, our admin team will review your submission and approve it for listing on our platform. We are excited to have you share your expertise with our community! 😀
+            Welcome to our service posting platform! With this form, you can showcase your services on our website. Once you submit the form, our admin team will review your submission and approve it for listing on our platform. We are excited to have you share your expertise with our community! 😀
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="title"
-            label="News Title"
+            label="Service Title"
             fullWidth
             required
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
             margin="dense"
             id="description"
-            label="News Description"
+            label="Service Description"
             fullWidth
             multiline
             rows={3}
             inputProps={{ maxLength: 500 }}
             required
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <TextField
+            margin="dense"
+            id="phone-number"
+            label="Phone Number"
+            fullWidth
+            type='tel'
+            inputProps={{
+              pattern: "[0-9]{10,15}",
+              title: "Enter a valid phone number"
+            }}
+            required
+            value={contactNumber}
+            onChange={(e) => setContactNumber(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            id="email"
+            label="Email"
+            fullWidth
+            type='email'
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="file"
@@ -178,7 +231,7 @@ export default function NeighborhoodPage() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleSubmit}>Create</Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
@@ -186,7 +239,7 @@ export default function NeighborhoodPage() {
 
       <Box sx={{ '& > :not(style)': { m: 1 }, position: 'fixed', right: 20, bottom: 10 }} onClick={handleClickOpen}>
         <Tooltip
-          title="Create News"
+          title="Create a new service"
           placement="left"
         >
           <Box >
@@ -206,3 +259,5 @@ export default function NeighborhoodPage() {
 
   )
 }
+
+export default UserMarketPlace

@@ -5,7 +5,6 @@ import HideAppBar from './Components/Navbar';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import MarketplacePage from './Pages/MarketplacePage';
 import Homepage from './Pages/Homepage';
-import NeighborhoodPage from './Pages/NeighborhoodPage';
 import { Container } from '@mui/material';
 import SignupPage from './Pages/SignupPage';
 import Footer from './Components/Footer';
@@ -21,7 +20,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/marketplace' element={<MarketplacePage />} />
-        <Route path='/neighborhood' element={<NeighborhoodPage />} />
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/profile' element={<ProfilePage />} />

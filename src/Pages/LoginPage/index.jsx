@@ -6,8 +6,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
 import './style.css'
-import Typography from '@mui/material/Typography';
-import InstagramIcon from '@mui/icons-material/Instagram';
+
 
 
 
