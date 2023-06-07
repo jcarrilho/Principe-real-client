@@ -8,7 +8,7 @@ export default function LogoutButton() {
 
   return (
     <Box sx={{
-      height: '66vh' 
+      height: '73vh' 
     }}>
     </Box>
   );

@@ -10,6 +10,7 @@ import SignupPage from './Pages/SignupPage';
 import Footer from './Components/Footer';
 import LoginPage from './Pages/LoginPage';
 import ProfilePage from './Pages/ProfilePage';
+import Wave from './Components/Wave';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       
       {location.pathname === '/' && <Footer />}
       {location.pathname === '/profile' && <Footer />}
+      {location.pathname === '/marketplace' && <Wave />}
     
     </Container>
 

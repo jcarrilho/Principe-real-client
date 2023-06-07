@@ -17,6 +17,7 @@ import Slide from '@mui/material/Slide';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
+import './index.css'
 
 const API_URL = 'http://localhost:5005';
 
@@ -44,7 +45,7 @@ function UserMarketPlace() {
     try {
       const uploadData = new FormData();
       uploadData.append("image", e.target.files[0]);
-      const response = await axios.post(`${process.env.API_URL}/upload, uploadData`);
+      const response = await axios.post(`${import.meta.envAPI_URL}/upload`, uploadData);
       console.log(response.data.fileUrl);
       setImage(response.data.fileUrl);
     } catch (error) {
@@ -99,7 +100,14 @@ function UserMarketPlace() {
 
 
   return (
-    <div id='services-wrap'>
+    <div className='scroll' id='services-wrap' style={{
+      backgroundColor: 'rgba(142, 201, 199, 0.2)',
+      borderRadius: '15px',
+      marginTop: '10px',
+      height: '85vh',
+      overflowY: 'scroll',
+    }}>
+    
       {services && services.map((service) => {
         if (service.status == "approved") {
           const deleteService = (serviceId) => {
@@ -135,6 +143,7 @@ function UserMarketPlace() {
                   <Card sx={{
                     maxWidth: 345,
                     mt: 4,
+                    my: 2,
                     borderRadius: 3,
 
                   }}>
@@ -143,7 +152,7 @@ function UserMarketPlace() {
                       <CardMedia
                         component="img"
                         height="200"
-                        image={service.image}
+                        image='/Images/img1.jpg'
                         alt="green iguana"
                       />
                       <CardContent>
@@ -156,9 +165,9 @@ function UserMarketPlace() {
                       </CardContent>
                     </CardActionArea>
                     <CardActions>
-                      <Button onClick={() => deleteService(service._id)} size="small" color="primary">
+                      {/* <Button onClick={() => deleteService(service._id)} size="small" color="primary">
                         Delete
-                      </Button>
+                      </Button> */}
 
                     </CardActions>
                   </Card>
@@ -230,7 +239,7 @@ function UserMarketPlace() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <input type="file"
-           onChange={(e) => handleFileUpload(e)} />
+            onChange={(e) => handleFileUpload(e)} />
         </DialogContent>
 
         <DialogActions>
