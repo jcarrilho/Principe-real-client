@@ -14,6 +14,8 @@ import { Link, useParams } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Link as ScrollLink } from 'react-scroll';
 import './index.css'
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/auth.context';
 
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -38,6 +40,15 @@ export default function HideAppBar(props) {
 
     const location = useLocation()
 
+    const navigate = useNavigate();
+    const { logout } = useContext(AuthContext);
+  
+    const handleLogout = () => {
+      logout();
+      navigate('/login');
+    };
+  
+
     return (
         <React.Fragment>
             <CssBaseline />
@@ -46,39 +57,65 @@ export default function HideAppBar(props) {
                 <AppBar sx={{ backgroundColor: '#91d1cf', boxShadow: 'none' }}>
                     <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        <Link to="/">
-                            <img src='Pe+ºas individuais principe+real/Logo + Simbolos/logo 1.png' style={{ width: '150px', height: 'auto', filter: 'brightness(0) invert(1)' }} />
+                            <Link to="/">
+                                <img src='Pe+ºas individuais principe+real/Logo + Simbolos/logo 1.png' style={{ width: '150px', height: 'auto', filter: 'brightness(0) invert(1)' }} />
                             </Link>
                         </Typography>
-                        <Link to="/">
+                        {/* <Link to="/">
                             {location.pathname !== '/' && <Button id="navbar-btn">Home</Button>}
-                        </Link>
+                        </Link> */}
                         {location.pathname === '/' &&
-                        <> 
-                        <ScrollLink to="about" smooth={true} duration={50}>
-                            <Button id="navbar-btn">About Us</Button>
-                        </ScrollLink>
-                        <ScrollLink to="neighborhood" smooth={true} duration={50}>
-                            <Button id="navbar-btn">Neighborhood</Button>
-                        </ScrollLink>
-                        <ScrollLink to="marketplace" smooth={true} duration={50}>
-                            <Button id="navbar-btn">MarketPlace</Button>
-                        </ScrollLink>
-                        </>                    
-                        }    
+                            <>
+                                <ScrollLink to="about" smooth={true} duration={50}>
+                                    <Button id="navbar-btn">About Us</Button>
+                                </ScrollLink>
+                                <ScrollLink to="neighborhood" smooth={true} duration={50}>
+                                    <Button id="navbar-btn">Neighborhood</Button>
+                                </ScrollLink>
+                                <ScrollLink to="marketplace" smooth={true} duration={50}>
+                                    <Button id="navbar-btn">MarketPlace</Button>
+                                </ScrollLink>
+                                <Link to="/login">
+                                    <Button id="navbar-btn">Login</Button>
+                                </Link>
+                                <Link to="/signup">
+                                    <Button id="navbar-btn">Sign Up</Button>
+                                </Link>
+                            </>
+                        }
+
+                        {location.pathname === '/marketplace' &&
+                            <>
+                                <Link to="/">
+                                    <Button id="navbar-btn">Back to home</Button>
+                                </Link>
+                                <Link to="/profile">
+                                    <Button id="navbar-btn">Profile</Button>
+                                </Link>
+                            </>
+                        }
+
+                        {location.pathname === '/login' && <Link to="/">
+                            <Button id="navbar-btn">Back to home</Button>
+                        </Link>}  
+
+                        {location.pathname === '/signup' &&  <Link to="/">
+                                    <Button id="navbar-btn">Back to home</Button>
+                                </Link>}
 
 
-                        {location.pathname !== '/login' && <Link to="/login">
-                            <Button id="navbar-btn">Login</Button>
-                        </Link>}
+                        {location.pathname === '/profile' &&
+                            <>
+                                <Link to="/">
+                                    {location.pathname !== '/' && <Button id="navbar-btn">Back to home</Button>}
+                                </Link>
+                                <Link to="/marketplace">
+                                    <Button id="navbar-btn">Marketplace</Button>
+                                </Link>
+                                <Button id="navbar-btn" onClick={handleLogout}>Logout</Button>
 
-                       
-                        <Link to="/signup">
-                            <Button id="navbar-btn">Sign Up</Button>
-                        </Link>
-                        <Link to="/profile">
-                            <Button id="navbar-btn">Profile</Button>
-                        </Link>
+                            </>
+                        }
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>

@@ -12,39 +12,45 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../Context/auth.context';
 import '../../Pages/MarketplacePage/index.css';
 import Paper from '@mui/material/Paper';
-// import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, FormControl, Select, MenuItem, InputLabel } from '@mui/material';
 import Slide from '@mui/material/Slide';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import NavigationIcon from '@mui/icons-material/Navigation';
 import Tooltip from '@mui/material/Tooltip';
 
 const API_URL = 'http://localhost:5005';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    // Perform image upload logic here
-  };
-  
+
 
 function UserMarketPlace() {
-const [services, setServices] = useState([]);
-const [open, setOpen] = useState(false);
-const [title, setTitle] = useState('');
-const [description, setDescription] = useState('');
-const [contactNumber, setContactNumber] = useState('');
-const [image, setImage] = useState('');
-const [email, setEmail] = useState('');
-const [success, setSuccess] = useState(false);
+  const [services, setServices] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [image, setImage] = useState('');
+  const [email, setEmail] = useState('');
+  const [success, setSuccess] = useState(false);
 
-const { loggedIn, user } = useContext(AuthContext);
+  const { loggedIn, user } = useContext(AuthContext);
+
+  //  this method handles the file upload 
+  const handleFileUpload = async (e) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+    try {
+      const uploadData = new FormData();
+      uploadData.append("image", e.target.files[0]);
+      const response = await axios.post(`${process.env.API_URL}/upload, uploadData`);
+      console.log(response.data.fileUrl);
+      setImage(response.data.fileUrl);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 
@@ -60,26 +66,26 @@ const { loggedIn, user } = useContext(AuthContext);
     setOpen(false);
   };
 
-  const handleSubmit = () =>{
+  const handleSubmit = () => {
     setSuccess(false);
     let role = user.role;
-    let requestBody = {title, description, contactNumber, image, email, role}
+    let requestBody = { title, description, contactNumber, image, email, role }
     axios.post(`${API_URL}/api/services`, requestBody)
-    .then(() => {
-      handleClose()
-      setTitle('');
-      setDescription('');
-      setContactNumber('');
-      setEmail('');
-      setImage('');
-      setSuccess(true);
-    }
-    )
-    .catch((error) => console.log(error)) 
+      .then(() => {
+        handleClose()
+        setTitle('');
+        setDescription('');
+        setContactNumber('');
+        setEmail('');
+        setImage('');
+        setSuccess(true);
+      }
+      )
+      .catch((error) => console.log(error))
   }
 
-   // function that gets services via axios
-   const getAllServices = () => {
+  // function that gets services via axios
+  const getAllServices = () => {
     axios
       .get(`${API_URL}/api/services`)
       .then((response) => setServices(response.data))
@@ -94,22 +100,10 @@ const { loggedIn, user } = useContext(AuthContext);
 
   return (
     <div id='services-wrap'>
-       {services && services.map((service) => {
-        if(service.status=="approved"){
-        const deleteService = (serviceId) => {
-          axios.delete(`${API_URL}/api/services/${serviceId}`)
-            .then(() => {
-              // Service deleted successfully, you can perform any necessary actions
-              // such as updating the UI or displaying a success message.
-              getAllServices(); // Refresh the list of services
-            })
-            .catch((error) => {
-              console.log(error);
-              // Handle the error case if the service deletion fails.
-            });
-
-          const updateService = (serviceId) => {
-            axios.update(`${API_URL}/api/services/${serviceId}`)
+      {services && services.map((service) => {
+        if (service.status == "approved") {
+          const deleteService = (serviceId) => {
+            axios.delete(`${API_URL}/api/services/${serviceId}`)
               .then(() => {
                 // Service deleted successfully, you can perform any necessary actions
                 // such as updating the UI or displaying a success message.
@@ -118,50 +112,63 @@ const { loggedIn, user } = useContext(AuthContext);
               .catch((error) => {
                 console.log(error);
                 // Handle the error case if the service deletion fails.
-              })
+              });
+
+            const updateService = (serviceId) => {
+              axios.update(`${API_URL}/api/services/${serviceId}`)
+                .then(() => {
+                  // Service deleted successfully, you can perform any necessary actions
+                  // such as updating the UI or displaying a success message.
+                  getAllServices(); // Refresh the list of services
+                })
+                .catch((error) => {
+                  console.log(error);
+                  // Handle the error case if the service deletion fails.
+                })
+            };
           };
-        };
 
-        return (
-          <div key={service._id}>
-            <Paper elevation={10} sx={{ borderRadius: 3 }}>
-              <Box>
-                <Card sx={{
-                  maxWidth: 345,
-                  mt: 4,
-                  borderRadius: 3,
+          return (
+            <div key={service._id}>
+              <Paper elevation={10} sx={{ borderRadius: 3 }}>
+                <Box>
+                  <Card sx={{
+                    maxWidth: 345,
+                    mt: 4,
+                    borderRadius: 3,
 
-                }}>
+                  }}>
 
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="200"
-                      image="/Images/img1.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {service.title}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {service.description}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button onClick={() => deleteService(service._id)} size="small" color="primary">
-                      Delete
-                    </Button>
-                    
-                  </CardActions>
-                </Card>
-              </Box>
-            </Paper>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height="200"
+                        image={service.image}
+                        alt="green iguana"
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {service.title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {service.description}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    <CardActions>
+                      <Button onClick={() => deleteService(service._id)} size="small" color="primary">
+                        Delete
+                      </Button>
 
-          </div>
-        )
-      }}) }
+                    </CardActions>
+                  </Card>
+                </Box>
+              </Paper>
+
+            </div>
+          )
+        }
+      })}
 
       <Dialog
         open={open}
@@ -222,14 +229,10 @@ const { loggedIn, user } = useContext(AuthContext);
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            type="file"
-            accept="image/*"
-            id="image"
-            onChange={handleImageUpload}
-            required
-          />
+          <input type="file"
+           onChange={(e) => handleFileUpload(e)} />
         </DialogContent>
+
         <DialogActions>
           <Button onClick={handleSubmit}>Create</Button>
           <Button onClick={handleClose}>Cancel</Button>

@@ -13,6 +13,9 @@ import ProfilePage from './Pages/ProfilePage';
 
 
 function App() {
+  
+  const location = useLocation();
+
 
   return (
     <Container>
@@ -24,7 +27,10 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/profile' element={<ProfilePage />} />
       </Routes>
-     <Footer />
+      
+      {location.pathname === '/' && <Footer />}
+      {location.pathname === '/profile' && <Footer />}
+    
     </Container>
 
   )
