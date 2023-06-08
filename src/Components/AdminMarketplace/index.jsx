@@ -304,7 +304,7 @@ function AdminMarketPlace() {
                         <Button onClick={handleCloseEditDialog}>Cancel</Button>
                     </DialogActions>
                 </Dialog>
-            </Box >
+            </Box>
             {/* --------------------------------PENDING SECTION------------------------------------------------------------------ */}
 
             <h1 style={{ margin: '10px' }}> Pending...</h1>
