@@ -20,6 +20,8 @@ import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
 import './index.css'
 
 const API_URL = import.meta.env.VITE_APP_SERVER_URL;
@@ -36,6 +38,7 @@ const handleImageUpload = (event) => {
 
 function AdminMarketPlace() {
     const [services, setServices] = useState([]);
+    const [service, setService] = useState('');
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -79,21 +82,43 @@ function AdminMarketPlace() {
             .catch((error) => console.log(error))
     }
 
+    const handleOpenUpdate = (id) =>{
+        setOpenEditDialog(true);
+                setTitle('Loading');
+                setDescription('Loading');
+                setContactNumber('Loading');
+                setEmail('Loading');
+                setImage('Loading');
+        axios
+            .get(`${API_URL}/api/services/${id}`)
+            .then((response) => {
+                setService(response.data);
+                setTitle(response.data.title? response.data.title : '');
+                setDescription(response.data.description?response.data.description: '');
+                setContactNumber(response.data.contactNumber?response.data.contactNumber: '' );
+                setEmail(response.data.email? response.data.email : '');
+                setImage(response.data.image? response.data.image:'');
+    
+            })
+            .catch((error) => console.log(error))
+    }
+
     const handleUpdate = (serviceId) => {
         setSuccess(false);
         let role = user.role;
-        let requestBody = { title, description, contactNumber, image, email, role };
+        let requestBody = { title, description, contactNumber, email, role };
+
 
         axios.put(`${API_URL}/api/services/${serviceId}`, requestBody)
             .then((response) => {
-                const { title, description, contactNumber, email, image } = response.data;
-                setTitle(title);
-                setDescription(description);
-                setContactNumber(contactNumber);
-                setEmail(email);
-                setImage(image);
+                setTitle('');
+                setDescription('');
+                setContactNumber('');
+                setEmail('');
+                setImage('');
                 setSuccess(true);
-                setOpenEditDialog(true);
+                getAllServices()
+                setOpenEditDialog(false);
             })
             .catch((error) => console.log(error));
     };
@@ -101,14 +126,15 @@ function AdminMarketPlace() {
 
     const handleCloseEditDialog = () => {
         setOpenEditDialog(false);
-    };
-
+    }
 
     // function that gets services via axios
     const getAllServices = () => {
         axios
             .get(`${API_URL}/api/services`)
-            .then((response) => setServices(response.data))
+            .then((response) => {
+                setServices(response.data);
+            })
             .catch((error) => console.log(error))
     };
 
@@ -135,15 +161,18 @@ function AdminMarketPlace() {
 
         // ------------------------APPROVED SECTION -----------------------------------------------------------------
 
-        <div id='scroll' style={{
+        <div className='scroll' style={{
             backgroundColor: 'rgba(142, 201, 199, 0.2)',
             borderRadius: '15px',
-            marginTop: '10px',
-            height: '85vh',
+            marginTop: '25px',
+            height: '80vh',
             overflowY: 'scroll',
         }}>
 
-            <h1 style={{ margin: '10px' }}>Approved</h1>
+            <h1 style={{ margin: '10px', 
+            color:'#29584b',
+            marginLeft: '25px'
+             }}>Approved</h1>
             <Box id='services-wrap'>
                 {services && services.map((service) => {
                     if (service.status == "approved") {
@@ -175,12 +204,14 @@ function AdminMarketPlace() {
                         };
 
                         return (
-                            <div key={service._id} style={{}}>
+                            
+                            <div key={service._id} >
                                 <Paper elevation={10} sx={{ borderRadius: 3 }}>
                                     <Box>
                                         <Card sx={{
                                             maxWidth: 345,
-                                            mt: 4,
+                                            mt: 3,
+                                            mb: 2,
                                             borderRadius: 3,
 
                                         }}>
@@ -188,7 +219,7 @@ function AdminMarketPlace() {
                                                 <CardMedia
                                                     component="img"
                                                     height="200"
-                                                    image={service.image}
+                                                    image='/Images/img1.jpg'
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -200,29 +231,35 @@ function AdminMarketPlace() {
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>
-                                            <CardActions>
-                                                <IconButton onClick={() => deleteService(service._id)} aria-label="delete" size="large" sx={{
-                                                    '&:hover': {
-                                                        color: 'red'
-                                                    }
-                                                }}>
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                                {/* <Button onClick={() => deleteService(service._id)} size="small" color="primary">
-                                                    Delete
-                                                </Button> */}
-                                                <Button onClick={() => handleUpdate(service._id)} size="small" color="primary" sx={{
-                                                    backgroundColor: '#91d1cf',
-                                                    color: 'white',
-                                                    border: 'none',
-                                                    '&:hover': {
-                                                        backgroundColor: '#66a29e',
-                                                        border: 'none'
-                                                    }
-                                                }}>
-                                                    Edit
-                                                </Button>
-                                            </CardActions>
+                                            <div style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                            }}>
+                                                <CardActions>
+                                                    <IconButton onClick={() => deleteService(service._id)} aria-label="delete" size="large" sx={{
+                                                     
+                                                        '&:hover': {
+                                                            color: 'red'
+                                                        }
+                                                    }}>
+                                                        <DeleteIcon    sx={{
+                                                            width: '30px',
+                                                            height: '30px'
+                                                        }} />
+                                                    </IconButton>
+                                                    <Button onClick={() => handleOpenUpdate(service._id)} size="small" color="primary" sx={{
+                                                        backgroundColor: '#91d1cf',
+                                                        color: 'white',
+                                                        border: 'none',
+                                                        '&:hover': {
+                                                            backgroundColor: '#66a29e',
+                                                            border: 'none'
+                                                        }
+                                                    }}>
+                                                        Edit
+                                                    </Button>
+                                                </CardActions>
+                                            </div>
                                         </Card>
                                     </Box>
                                 </Paper>
@@ -239,11 +276,11 @@ function AdminMarketPlace() {
                     onClose={handleCloseEditDialog}
                     aria-describedby="alert-dialog-slide-description"
                 >
-                    <DialogTitle>{"CREATE A NEW SERVICE"}</DialogTitle>
+                    <DialogTitle>{"UPDATE A SERVICE"}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
+                        {/* <DialogContentText id="alert-dialog-slide-description">
                             Welcome to our service posting platform! With this form, you can showcase your services on our website. Once you submit the form, our admin team will review your submission and approve it for listing on our platform. We are excited to have you share your expertise with our community! 😀
-                        </DialogContentText>
+                        </DialogContentText> */}
                         <TextField
                             autoFocus
                             margin="dense"
@@ -300,15 +337,17 @@ function AdminMarketPlace() {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleUpdate}>Update</Button>
+                        <Button onClick={()=>handleUpdate(service._id)}>Update</Button>
                         <Button onClick={handleCloseEditDialog}>Cancel</Button>
                     </DialogActions>
                 </Dialog>
             </Box>
             {/* --------------------------------PENDING SECTION------------------------------------------------------------------ */}
 
-            <h1 style={{ margin: '10px' }}> Pending...</h1>
-            <Box id='services-wrap'>
+            <h1 style={{ margin: '5px', color:'#29584b', marginLeft: '25px' }}> Pending...</h1>
+            <Box id='services-wrap' sx={{
+                mb: 4,
+            }}>
 
                 {services && services.map((service) => {
                     if (service.status == "pending") {
@@ -344,7 +383,7 @@ function AdminMarketPlace() {
                                     <Box>
                                         <Card sx={{
                                             maxWidth: 345,
-                                            mt: 4,
+                                            mt: 3,
                                             borderRadius: 3,
                                             objectFit: 'cover'
 
@@ -354,7 +393,7 @@ function AdminMarketPlace() {
                                                 <CardMedia
                                                     component="img"
                                                     height="200"
-                                                    image={service.image}
+                                                    image='/Images/img1.jpg'
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -366,14 +405,33 @@ function AdminMarketPlace() {
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>
-                                            <CardActions>
-                                                <Button onClick={() => approveService(service._id)} size="small" color="primary">
-                                                    Approve
-                                                </Button>
-                                                <Button onClick={() => deleteService(service._id)} size="small" color="primary">
-                                                    Reject
-                                                </Button>
-                                            </CardActions>
+                                            <div style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                            }}>
+                                                <CardActions>
+                                                    <IconButton onClick={() => approveService(service._id)} aria-label="check" size="large" sx={{
+                                                        '&:hover': {
+                                                            color: 'green'
+                                                        }
+                                                    }}>
+                                                        <CheckIcon sx={{
+                                                            width: '35px',
+                                                            height: '35px'
+                                                        }} />
+                                                    </IconButton>
+                                                    <IconButton onClick={() => deleteService(service._id)} aria-label="clear" size="large" sx={{
+                                                        '&:hover': {
+                                                            color: 'red'
+                                                        }
+                                                    }}>
+                                                        <ClearIcon sx={{
+                                                            width: '35px',
+                                                            height: '35px'
+                                                        }} />
+                                                    </IconButton>
+                                                </CardActions>
+                                            </div>
                                         </Card>
                                     </Box>
                                 </Paper>
@@ -457,7 +515,7 @@ function AdminMarketPlace() {
                 </Dialog>
 
 
-                <Box sx={{ '& > :not(style)': { m: 1 }, position: 'fixed', right: 20, bottom: 10 }} onClick={handleClickOpen}>
+                <Box sx={{ '& > :not(style)': { m: 1 }, position: 'fixed', right: 30, bottom: 50 }} onClick={handleClickOpen}>
                     <Tooltip
                         title="Create a new service"
                         placement="left"

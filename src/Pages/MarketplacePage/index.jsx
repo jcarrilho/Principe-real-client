@@ -77,7 +77,7 @@ export default function MarketplacePage() {
 
   return (
     
-    user? user.role == 'admin'? (<AdminMarketPlace jobServices={services}  handleSubmit={handleSubmit}  handleClickOpen={handleClickOpen}/>) : (<UserMarketPlace jobServices={services}  handleSubmit={handleSubmit}  handleClickOpen={handleClickOpen}/>):(<h1>Loading...</h1>)
+    user? user.role == 'admin'? (<AdminMarketPlace jobServices={services}  handleSubmit={handleSubmit}  handleClickOpen={handleClickOpen}/>) : (<UserMarketPlace jobServices={services}  handleSubmit={handleSubmit}  handleClickOpen={handleClickOpen}/>):(<UserMarketPlace jobServices={services}  handleSubmit={handleSubmit}  handleClickOpen={handleClickOpen}/>)
     
   )
 }

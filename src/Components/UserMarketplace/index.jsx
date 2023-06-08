@@ -101,30 +101,22 @@ function UserMarketPlace() {
 
 
   return (
-    <div className='scroll' id='services-wrap' style={{
-      backgroundColor: 'rgba(142, 201, 199, 0.2)',
-      borderRadius: '15px',
-      marginTop: '10px',
-      height: '85vh',
-      overflowY: 'scroll',
+    <Paper elevation={12} sx={{
+      borderRadius: 3,
     }}>
-    
-      {services && services.map((service) => {
-        if (service.status == "approved") {
-          const deleteService = (serviceId) => {
-            axios.delete(`${API_URL}/api/services/${serviceId}`)
-              .then(() => {
-                // Service deleted successfully, you can perform any necessary actions
-                // such as updating the UI or displaying a success message.
-                getAllServices(); // Refresh the list of services
-              })
-              .catch((error) => {
-                console.log(error);
-                // Handle the error case if the service deletion fails.
-              });
 
-            const updateService = (serviceId) => {
-              axios.update(`${API_URL}/api/services/${serviceId}`)
+      <div className='scroll' id='services-wrap' style={{
+        backgroundColor: 'rgba(142, 201, 199, 0.2)',
+        borderRadius: '15px',
+        marginTop: '10px',
+        height: '80vh',
+        overflowY: 'scroll',
+      }}>
+
+        {services && services.map((service) => {
+          if (service.status == "approved") {
+            const deleteService = (serviceId) => {
+              axios.delete(`${API_URL}/api/services/${serviceId}`)
                 .then(() => {
                   // Service deleted successfully, you can perform any necessary actions
                   // such as updating the UI or displaying a success message.
@@ -133,144 +125,158 @@ function UserMarketPlace() {
                 .catch((error) => {
                   console.log(error);
                   // Handle the error case if the service deletion fails.
-                })
+                });
+
+              const updateService = (serviceId) => {
+                axios.update(`${API_URL}/api/services/${serviceId}`)
+                  .then(() => {
+                    // Service deleted successfully, you can perform any necessary actions
+                    // such as updating the UI or displaying a success message.
+                    getAllServices(); // Refresh the list of services
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    // Handle the error case if the service deletion fails.
+                  })
+              };
             };
-          };
 
-          return (
-            <div key={service._id}>
-              <Paper elevation={10} sx={{ borderRadius: 3 }}>
-                <Box>
-                  <Card sx={{
-                    maxWidth: 345,
-                    mt: 4,
-                    my: 2,
-                    borderRadius: 3,
+            return (
+              <div key={service._id}>
+                <Paper elevation={6} sx={{ borderRadius: 3 }}>
+                  <Box>
+                    <Card sx={{
+                      maxWidth: 345,
+                      mt: 4,
+                      my: 2,
+                      borderRadius: 3,
 
-                  }}>
+                    }}>
 
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="200"
-                        image='/Images/img1.jpg'
-                        alt="green iguana"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {service.title}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {service.description}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                      {/* <Button onClick={() => deleteService(service._id)} size="small" color="primary">
+                      <CardActionArea>
+                        <CardMedia
+                          component="img"
+                          height="200"
+                          image='/Images/img1.jpg'
+                          alt="green iguana"
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {service.title}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {service.description}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                      <CardActions>
+                        {/* <Button onClick={() => deleteService(service._id)} size="small" color="primary">
                         Delete
                       </Button> */}
 
-                    </CardActions>
-                  </Card>
-                </Box>
-              </Paper>
+                      </CardActions>
+                    </Card>
+                  </Box>
+                </Paper>
 
-            </div>
-          )
-        }
-      })}
+              </div>
+              
+            )
+          }
+        })}
 
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{"CREATE A NEW SERVICE"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Welcome to our service posting platform! With this form, you can showcase your services on our website. Once you submit the form, our admin team will review your submission and approve it for listing on our platform. We are excited to have you share your expertise with our community! 😀
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="title"
-            label="Service Title"
-            fullWidth
-            required
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <TextField
-            margin="dense"
-            id="description"
-            label="Service Description"
-            fullWidth
-            multiline
-            rows={3}
-            inputProps={{ maxLength: 500 }}
-            required
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-
-          <TextField
-            margin="dense"
-            id="phone-number"
-            label="Phone Number"
-            fullWidth
-            type='tel'
-            inputProps={{
-              pattern: "[0-9]{10,15}",
-              title: "Enter a valid phone number"
-            }}
-            required
-            value={contactNumber}
-            onChange={(e) => setContactNumber(e.target.value)}
-          />
-          <TextField
-            margin="dense"
-            id="email"
-            label="Email"
-            fullWidth
-            type='email'
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input type="file"
-            onChange={(e) => handleFileUpload(e)} />
-        </DialogContent>
-
-        <DialogActions>
-          <Button onClick={handleSubmit}>Create</Button>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
-
-
-      <Box sx={{ '& > :not(style)': { m: 1 }, position: 'fixed', right: 20, bottom: 10 }} onClick={handleClickOpen}>
-        <Tooltip
-          title="Create a new service"
-          placement="left"
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-describedby="alert-dialog-slide-description"
         >
-          <Box >
-            <Fab sx={{
-              backgroundColor: '#91d1cf',
-              '&:hover': {
-                backgroundColor: '#66a29e'
-              }
-            }} aria-label="add"
-            >
-              <AddIcon sx={{ color: 'white', fontSize: '32px' }} />
-            </Fab>
-          </Box>
-        </Tooltip>
-      </Box>
-    </div>
+          <DialogTitle>{"CREATE A NEW SERVICE"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Welcome to our service posting platform! With this form, you can showcase your services on our website. Once you submit the form, our admin team will review your submission and approve it for listing on our platform. We are excited to have you share your expertise with our community! 😀
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="title"
+              label="Service Title"
+              fullWidth
+              required
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <TextField
+              margin="dense"
+              id="description"
+              label="Service Description"
+              fullWidth
+              multiline
+              rows={3}
+              inputProps={{ maxLength: 500 }}
+              required
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
-  )
+            <TextField
+              margin="dense"
+              id="phone-number"
+              label="Phone Number"
+              fullWidth
+              type='tel'
+              inputProps={{
+                pattern: "[0-9]{10,15}",
+                title: "Enter a valid phone number"
+              }}
+              required
+              value={contactNumber}
+              onChange={(e) => setContactNumber(e.target.value)}
+            />
+            <TextField
+              margin="dense"
+              id="email"
+              label="Email"
+              fullWidth
+              type='email'
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input type="file"
+              onChange={(e) => handleFileUpload(e)} />
+          </DialogContent>
+
+          <DialogActions>
+            <Button onClick={handleSubmit}>Create</Button>
+            <Button onClick={handleClose}>Cancel</Button>
+          </DialogActions>
+        </Dialog>
+
+
+        <Box sx={{ '& > :not(style)': { m: 1 }, position: 'fixed', right: 30, bottom: 50 }} onClick={handleClickOpen}>
+          <Tooltip
+            title="Create a new service"
+            placement="left"
+          >
+            <Box >
+              <Fab sx={{
+                backgroundColor: '#91d1cf',
+                '&:hover': {
+                  backgroundColor: '#66a29e'
+                }
+              }} aria-label="add"
+              >
+                <AddIcon sx={{ color: 'white', fontSize: '32px' }} />
+              </Fab>
+            </Box>
+          </Tooltip>
+        </Box>
+      </div>
+      </Paper>
+
+      )
 }
 
-export default UserMarketPlace
+      export default UserMarketPlace

@@ -81,50 +81,54 @@ function Homepage() {
             >
 
 
+                <Paper elevation={12} sx={{ borderRadius: 3,
+                width: '90%', }}>
 
-                <Carousel style={{
-                    width: '90%',
-                    "&[data-aos='fade-up']": {
-                        animation: "fade-up-animation 1s ease-in-out",
-                    },
-                    "@keyframes fade-up-animation": {
-                        "0%": {
-                            opacity: 0,
-                            transform: "translateY(20px)",
+                    <Carousel style={{
+                        borderRadius: 10,
+                        // width: '90%',
+                        "&[data-aos='fade-up']": {
+                            animation: "fade-up-animation 1s ease-in-out",
                         },
-                        "100%": {
-                            opacity: 1,
-                            transform: "translateY(0)",
+                        "@keyframes fade-up-animation": {
+                            "0%": {
+                                opacity: 0,
+                                transform: "translateY(20px)",
+                            },
+                            "100%": {
+                                opacity: 1,
+                                transform: "translateY(0)",
+                            },
                         },
-                    },
-                }}
-                    data-aos="fade-in" data-aos-duration="2000"
-                    interval={3000}>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src="/Images/banner1.jpg"
-                            alt="First slide"
-                        />
+                    }}
+                        data-aos="fade-in" data-aos-duration="2000"
+                        interval={3000}>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src="/Images/banner1.jpg"
+                                alt="First slide"
+                            />
 
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src="/Images/banner2.jpg"
-                            alt="Second slide"
-                        />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src="/Images/banner2.jpg"
+                                alt="Second slide"
+                            />
 
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src="/Images/banner3.jpg"
-                            alt="Second slide"
-                        />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src="/Images/banner3.jpg"
+                                alt="Second slide"
+                            />
 
-                    </Carousel.Item>
-                </Carousel>
+                        </Carousel.Item>
+                    </Carousel>
+                </Paper>
             </Box>
 
             {/* -------------------------------------ABOUT SECTION--------------------------------------------------------------------------- */}
@@ -246,7 +250,7 @@ function Homepage() {
                 id="neighborhood"
                 sx={{
                     height: '100vh',
-                    my: 0,
+                    my: -1,
                     color: 'rgba(0, 0, 0, 0.6)',
                     position: 'relative',
                 }}
@@ -261,7 +265,7 @@ function Homepage() {
 
                 >
                     <div className="wave-container">
-                        <img src='/Images/wave (15).svg' />
+                        <img src='/Images/wave (19).svg' />
                     </div>
                 </div>
                 <Typography variant='h3' sx={{

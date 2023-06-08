@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import './App.css'
-import HideAppBar from './Components/Navbar';
+import Navbar from './Components/Navbar';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import MarketplacePage from './Pages/MarketplacePage';
 import Homepage from './Pages/Homepage';
@@ -12,6 +12,9 @@ import LoginPage from './Pages/LoginPage';
 import ProfilePage from './Pages/ProfilePage';
 import Wave from './Components/Wave';
 
+import IsAnon from './Components/IsAnon';
+import IsPrivate from './Components/IsPrivate';
+
 
 function App() {
   
@@ -20,12 +23,12 @@ function App() {
 
   return (
     <Container>
-      <HideAppBar />
+      <Navbar />
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/marketplace' element={<MarketplacePage />} />
-        <Route path='/signup' element={<SignupPage />} />
-        <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={<IsAnon><SignupPage /></IsAnon>} />
+        <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path='/profile' element={<ProfilePage />} />
       </Routes>
       

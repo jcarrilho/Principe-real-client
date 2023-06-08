@@ -59,7 +59,7 @@ HideOnScroll.propTypes = {
     window: PropTypes.func,
 };
 
-export default function HideAppBar(props) {
+export default function Navbar(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -79,7 +79,7 @@ export default function HideAppBar(props) {
     const navigate = useNavigate();
     const location = useLocation()
 
-    const { logout } = useContext(AuthContext);
+    const { loggedIn, logout } = useContext(AuthContext);
 
     const handleLogout = () => {
         logout();
@@ -105,6 +105,7 @@ export default function HideAppBar(props) {
                 setSuccessMessage('Login successful! Redirecting...');
                 authenticateUser();
                 setTimeout(() => navigate('/marketplace'), 2000);
+                handleClose();
             })
             .catch((error) => {
                 setErrorMessage('An error occurred or invalid credentials. Please try again.');
@@ -128,7 +129,23 @@ export default function HideAppBar(props) {
                         {/* <Link to="/">
                             {location.pathname !== '/' && <Button id="navbar-btn">Home</Button>}
                         </Link> */}
-                        {location.pathname === '/' &&
+                        {location.pathname === '/'?
+                            loggedIn?
+                            <>
+                                <ScrollLink to="about" smooth={true} duration={50}>
+                                    <Button id="navbar-btn">About Us</Button>
+                                </ScrollLink>
+                                <ScrollLink to="neighborhood" smooth={true} duration={50}>
+                                    <Button id="navbar-btn">Neighborhood</Button>
+                                </ScrollLink>
+                                <ScrollLink to="marketplace" smooth={true} duration={50}>
+                                    <Button id="navbar-btn">MarketPlace</Button>
+                                </ScrollLink>
+                                <Link to="/profile">
+                                    <Button id="navbar-btn">Profile</Button>
+                                </Link>
+                            </>
+                            :
                             <>
                                 <ScrollLink to="about" smooth={true} duration={50}>
                                     <Button id="navbar-btn">About Us</Button>
@@ -146,9 +163,11 @@ export default function HideAppBar(props) {
                                     <Button id="navbar-btn">Sign Up</Button>
                                 </Link>
                             </>
+                            : null
                         }
 
-                        {location.pathname === '/marketplace' &&
+                        {location.pathname === '/marketplace'?
+                            loggedIn? 
                             <>
                                 <Link to="/">
                                     <Button id="navbar-btn">Back to home</Button>
@@ -157,6 +176,13 @@ export default function HideAppBar(props) {
                                     <Button id="navbar-btn">Profile</Button>
                                 </Link>
                             </>
+                            : 
+                            <>
+                                <Link to="/">
+                                    <Button id="navbar-btn">Back to home</Button>
+                                </Link>
+                            </>
+                            :null
                         }
 
                         {location.pathname === '/login' && <Link to="/">
@@ -186,52 +212,81 @@ export default function HideAppBar(props) {
                             keepMounted
                             onClose={handleClose}
                             aria-describedby="alert-dialog-slide-description"
-                            sx={{margin: 'auto'}}
+                            sx={{
+                                margin: 'auto',
+                            }}
                         >
-                            <DialogTitle>Welcome!</DialogTitle>
-                            <DialogContent>
-                                <DialogContentText id="alert-dialog-slide-description">
-                                    <Box
-                                        component="form"
-                                        onSubmit={handleSubmit}
-                                        sx={{
-                                            '& .MuiTextField-root': { m: 1, width: '50ch' },
-                                            display: 'flex',
-                                            flexDirection: 'column'
-                                        }}
-                                        autoComplete="off"
-                                    >
-                                        <div>
-                                            {errorMessage && <p>{errorMessage}</p>}
-                                            {successMessage && <p>{successMessage}</p>}
-                                            <TextField
-                                                required
-                                                id="standard-email-input"
-                                                label="Email"
-                                                type="text"
-                                                variant="standard"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                            />
-                                            <TextField
-                                                required
-                                                id="standard-password-input"
-                                                label="Password"
-                                                type="password"
-                                                autoComplete="current-password"
-                                                variant="standard"
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
-                                            />
-                                            
-                                        </div>
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                margin: 'auto',
+                                backgroundColor: 'rgba(142, 201, 199, 0.3)',
+                                
+                            }}>
+                                <DialogTitle sx={{ margin: 'auto', fontSize: '2rem',  color: '#29584b'}}>Welcome!</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-slide-description">
+                                        <Box
+                                            component="form"
+                                            onSubmit={handleSubmit}
+                                            sx={{
+                                                '& .MuiTextField-root': { m: 1, width: '50ch' },
+                                                display: 'flex',
+                                                flexDirection: 'column',
 
-                                    </Box>
-                                </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                                <Button  onClick={handleSubmit}>Login</Button>
-                                <Button onClick={handleClose}>Agree</Button>
+                                            }}
+                                            autoComplete="off"
+                                        >
+                                            <div style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justifyContent: 'center'
+                                            }}>
+                                                {errorMessage && <p>{errorMessage}</p>}
+                                                {successMessage && <p>{successMessage}</p>}
+                                                <TextField
+                                                    required
+                                                    id="standard-email-input"
+                                                    label="Email"
+                                                    type="text"
+                                                    variant="standard"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                />
+                                                <TextField
+                                                    required
+                                                    id="standard-password-input"
+                                                    label="Password"
+                                                    type="password"
+                                                    autoComplete="current-password"
+                                                    variant="standard"
+                                                    value={password}
+                                                    onChange={(e) => setPassword(e.target.value)}
+                                                />
+                                            </div>
+
+                                        </Box>
+                                    </DialogContentText>
+                                </DialogContent>
+                            </Box>
+                            <DialogActions sx={{ backgroundColor: 'rgba(142, 201, 199, 0.3)' }}>
+                                <Box sx={{ color: '#fff' }}>
+                                    <Button onClick={handleSubmit} sx={{
+                                        color: '#29584b',
+                                        '&:hover': {
+                                            transform: 'translateY(-0.500rem)',
+                                            transition: 'transform 500ms',
+                                        }
+                                    }}>Login</Button>
+                                    <Button onClick={handleClose} sx={{
+                                        color: '#29584b',
+                                        '&:hover': {
+                                            transform: 'translateY(-0.500rem)',
+                                            transition: 'transform 500ms',
+                                        }
+                                    }}>Cancel</Button>
+                                </Box>
                             </DialogActions>
                         </Dialog>
                     </Toolbar>
