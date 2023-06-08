@@ -188,7 +188,7 @@ function AdminMarketPlace() {
                                                 <CardMedia
                                                     component="img"
                                                     height="200"
-                                                    image='public/Images/img1.jpg'
+                                                    image={service.image}
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -354,7 +354,7 @@ function AdminMarketPlace() {
                                                 <CardMedia
                                                     component="img"
                                                     height="200"
-                                                    image='/Images/img1.jpg'
+                                                    image={service.image}
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
