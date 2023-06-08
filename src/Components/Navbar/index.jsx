@@ -186,6 +186,7 @@ export default function HideAppBar(props) {
                             keepMounted
                             onClose={handleClose}
                             aria-describedby="alert-dialog-slide-description"
+                            sx={{margin: 'auto'}}
                         >
                             <DialogTitle>Welcome!</DialogTitle>
                             <DialogContent>

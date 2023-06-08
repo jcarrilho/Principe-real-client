@@ -10,7 +10,7 @@ function Wave() {
                 left: 'calc(-50vw + 49.3%)',
                 zIndex: '-1',
             }}>
-            <img src="public/Images/wave (17).svg" />
+            <img src="/Images/wave (17).svg" />
         </div>
     )
 }

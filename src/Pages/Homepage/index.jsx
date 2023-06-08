@@ -209,7 +209,7 @@ function Homepage() {
                                 <CardMedia
                                     component="img"
                                     height="240"
-                                    image="public/Images/about-img.jpg"
+                                    image="/Images/about-img.jpg"
                                     alt="green iguana"
                                 />
                                 <CardContent>
@@ -325,7 +325,7 @@ function Homepage() {
                                                 <CardMedia
                                                     component="img"
                                                     height="240"
-                                                    image="public/Images/sobre-img1.jpg"
+                                                    image="/Images/sobre-img1.jpg"
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -351,7 +351,7 @@ function Homepage() {
                                                 <CardMedia
                                                     component="img"
                                                     height="240"
-                                                    image="public/Images/sobre-img2.jpg"
+                                                    image="/Images/sobre-img2.jpg"
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -377,7 +377,7 @@ function Homepage() {
                                                 <CardMedia
                                                     component="img"
                                                     height="240"
-                                                    image="public/Images/sobre-img3.jpg"
+                                                    image="/Images/sobre-img3.jpg"
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -409,7 +409,7 @@ function Homepage() {
                                                 <CardMedia
                                                     component="img"
                                                     height="240"
-                                                    image="public/Images/sobre-img4.jpg"
+                                                    image="/Images/sobre-img4.jpg"
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -435,7 +435,7 @@ function Homepage() {
                                                 <CardMedia
                                                     component="img"
                                                     height="240"
-                                                    image="public/Images/sobre-img5.jpg"
+                                                    image="/Images/sobre-img5.jpg"
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -461,7 +461,7 @@ function Homepage() {
                                                 <CardMedia
                                                     component="img"
                                                     height="240"
-                                                    image="public/Images/sobre-img6.jpg"
+                                                    image="/Images/sobre-img6.jpg"
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
