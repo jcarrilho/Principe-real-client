@@ -37,7 +37,7 @@ export default function LoginPage() {
         storeToken(response.data.authToken);
         setSuccessMessage('Login successful! Redirecting...');
         authenticateUser();
-        setTimeout(() => navigate('/'), 2000); 
+        setTimeout(() => navigate('/marketplace'), 2000); 
       })
       .catch((error) => {
         setErrorMessage('An error occurred or invalid credentials. Please try again.');

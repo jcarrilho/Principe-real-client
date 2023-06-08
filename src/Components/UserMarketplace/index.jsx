@@ -46,7 +46,7 @@ function UserMarketPlace() {
     try {
       const uploadData = new FormData();
       uploadData.append("image", e.target.files[0]);
-      const response = await axios.post(`${import.meta.envAPI_URL}/upload`, uploadData);
+      const response = await axios.post(`${import.meta.env.VITE_APP_SERVER_URL}/upload`, uploadData);
       console.log(response.data.fileUrl);
       setImage(response.data.fileUrl);
     } catch (error) {

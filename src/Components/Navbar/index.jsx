@@ -14,10 +14,33 @@ import { Link, useParams } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Link as ScrollLink } from 'react-scroll';
 import './index.css'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/auth.context';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import axios from 'axios';
+import TextField from '@mui/material/TextField';
+
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+const API_URL = import.meta.env.VITE_APP_SERVER_URL;
 
 function HideOnScroll(props) {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const { children, window } = props;
 
     const trigger = useScrollTrigger({
@@ -37,17 +60,58 @@ HideOnScroll.propTypes = {
 };
 
 export default function HideAppBar(props) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
-    const location = useLocation()
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
 
     const navigate = useNavigate();
+    const location = useLocation()
+
     const { logout } = useContext(AuthContext);
-  
+
     const handleLogout = () => {
-      logout();
-      navigate('/login');
+        logout();
+        navigate('/login');
     };
-  
+
+
+    const { storeToken, authenticateUser } = useContext(AuthContext);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!email || !password) {
+            setErrorMessage('Please fill out all fields!');
+            return;
+        }
+
+        axios
+            .post(`${API_URL}/auth/login`, { email, password })
+            .then((response) => {
+                // Saves JWT to localStorage
+                storeToken(response.data.authToken);
+                setSuccessMessage('Login successful! Redirecting...');
+                authenticateUser();
+                setTimeout(() => navigate('/marketplace'), 2000);
+            })
+            .catch((error) => {
+                setErrorMessage('An error occurred or invalid credentials. Please try again.');
+                console.error(error);
+            });
+    };
+
 
     return (
         <React.Fragment>
@@ -75,9 +139,9 @@ export default function HideAppBar(props) {
                                 <ScrollLink to="marketplace" smooth={true} duration={50}>
                                     <Button id="navbar-btn">MarketPlace</Button>
                                 </ScrollLink>
-                                <Link to="/login">
-                                    <Button id="navbar-btn">Login</Button>
-                                </Link>
+
+                                <Button id="navbar-btn" onClick={handleClickOpen}>Login</Button>
+
                                 <Link to="/signup">
                                     <Button id="navbar-btn">Sign Up</Button>
                                 </Link>
@@ -97,11 +161,11 @@ export default function HideAppBar(props) {
 
                         {location.pathname === '/login' && <Link to="/">
                             <Button id="navbar-btn">Back to home</Button>
-                        </Link>}  
+                        </Link>}
 
-                        {location.pathname === '/signup' &&  <Link to="/">
-                                    <Button id="navbar-btn">Back to home</Button>
-                                </Link>}
+                        {location.pathname === '/signup' && <Link to="/">
+                            <Button id="navbar-btn">Back to home</Button>
+                        </Link>}
 
 
                         {location.pathname === '/profile' &&
@@ -116,6 +180,59 @@ export default function HideAppBar(props) {
 
                             </>
                         }
+                        <Dialog
+                            open={open}
+                            TransitionComponent={Transition}
+                            keepMounted
+                            onClose={handleClose}
+                            aria-describedby="alert-dialog-slide-description"
+                        >
+                            <DialogTitle>Welcome!</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-slide-description">
+                                    <Box
+                                        component="form"
+                                        onSubmit={handleSubmit}
+                                        sx={{
+                                            '& .MuiTextField-root': { m: 1, width: '50ch' },
+                                            display: 'flex',
+                                            flexDirection: 'column'
+                                        }}
+                                        autoComplete="off"
+                                    >
+                                        <div>
+                                            {errorMessage && <p>{errorMessage}</p>}
+                                            {successMessage && <p>{successMessage}</p>}
+                                            <TextField
+                                                required
+                                                id="standard-email-input"
+                                                label="Email"
+                                                type="text"
+                                                variant="standard"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                            />
+                                            <TextField
+                                                required
+                                                id="standard-password-input"
+                                                label="Password"
+                                                type="password"
+                                                autoComplete="current-password"
+                                                variant="standard"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                            />
+                                            
+                                        </div>
+
+                                    </Box>
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button  onClick={handleSubmit}>Login</Button>
+                                <Button onClick={handleClose}>Agree</Button>
+                            </DialogActions>
+                        </Dialog>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>

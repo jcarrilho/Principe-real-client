@@ -21,7 +21,7 @@
 
         if (storedToken) {
           const response = await axios.get(
-            `${import.meta.env.VITE_APP_API_URL}/auth/verify`,
+            `${import.meta.env.VITE_APP_SERVER_URL}/auth/verify`,
             {
               headers: { Authorization: `Bearer ${storedToken}` },
             }
