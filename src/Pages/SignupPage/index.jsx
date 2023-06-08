@@ -5,7 +5,7 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = 'http://localhost:5005'; 
+const API_URL = import.meta.env.VITE_APP_SERVER_URL;
 
 export default function FormPropsTextFields() {
   const [firstName, setFirstName] = useState('');

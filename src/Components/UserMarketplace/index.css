@@ -12,6 +12,6 @@
   }
 
   .scroll::-webkit-scrollbar-thumb {
-    background: linear-gradient(#f6f6f8, #ffbcff);
+    background:  lightgray;
     border-radius: 5px;
   }

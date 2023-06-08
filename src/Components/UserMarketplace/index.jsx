@@ -17,9 +17,10 @@ import Slide from '@mui/material/Slide';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
+
 import './index.css'
 
-const API_URL = 'http://localhost:5005';
+const API_URL = import.meta.env.VITE_APP_SERVER_URL;
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;

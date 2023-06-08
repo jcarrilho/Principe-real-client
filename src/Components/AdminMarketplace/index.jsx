@@ -18,9 +18,11 @@ import Slide from '@mui/material/Slide';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './index.css'
 
-const API_URL = 'http://localhost:5005';
+const API_URL = import.meta.env.VITE_APP_SERVER_URL;
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -140,8 +142,8 @@ function AdminMarketPlace() {
             height: '85vh',
             overflowY: 'scroll',
         }}>
-      
-                <h1 style={{margin: '10px'}}>Approved</h1>
+
+            <h1 style={{ margin: '10px' }}>Approved</h1>
             <Box id='services-wrap'>
                 {services && services.map((service) => {
                     if (service.status == "approved") {
@@ -199,10 +201,25 @@ function AdminMarketPlace() {
                                                 </CardContent>
                                             </CardActionArea>
                                             <CardActions>
-                                                <Button onClick={() => deleteService(service._id)} size="small" color="primary">
+                                                <IconButton onClick={() => deleteService(service._id)} aria-label="delete" size="large" sx={{
+                                                    '&:hover': {
+                                                        color: 'red'
+                                                    }
+                                                }}>
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                                {/* <Button onClick={() => deleteService(service._id)} size="small" color="primary">
                                                     Delete
-                                                </Button>
-                                                <Button onClick={() => handleUpdate(service._id)} size="small" color="primary">
+                                                </Button> */}
+                                                <Button onClick={() => handleUpdate(service._id)} size="small" color="primary" sx={{
+                                                    backgroundColor: '#91d1cf',
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    '&:hover': {
+                                                        backgroundColor: '#66a29e',
+                                                        border: 'none'
+                                                    }
+                                                }}>
                                                     Edit
                                                 </Button>
                                             </CardActions>
@@ -287,10 +304,10 @@ function AdminMarketPlace() {
                         <Button onClick={handleCloseEditDialog}>Cancel</Button>
                     </DialogActions>
                 </Dialog>
-            </Box>
+            </Box >
             {/* --------------------------------PENDING SECTION------------------------------------------------------------------ */}
 
-                <h1 style={{margin: '10px'}}>Pending...</h1>
+            <h1 style={{ margin: '10px' }}> Pending...</h1>
             <Box id='services-wrap'>
 
                 {services && services.map((service) => {
@@ -337,7 +354,7 @@ function AdminMarketPlace() {
                                                 <CardMedia
                                                     component="img"
                                                     height="200"
-                                                    image={service.image}
+                                                    image='/Images/img1.jpg'
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -461,7 +478,7 @@ function AdminMarketPlace() {
             </Box>
 
 
-        </div>
+        </div >
 
     )
 }

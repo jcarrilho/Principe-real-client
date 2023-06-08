@@ -69,7 +69,7 @@ function Homepage() {
 
             }}>
                 <div className="wave-container">
-                <img src='/Images/wave (9).svg'/>
+                    <img src='/Images/wave (9).svg' />
                 </div>
             </div>
             <Box
@@ -131,6 +131,8 @@ function Homepage() {
                     </Carousel.Item>
                 </Carousel>
             </Box>
+
+            {/* -------------------------------------ABOUT SECTION--------------------------------------------------------------------------- */}
 
             <Box
                 id="about"
@@ -236,7 +238,7 @@ function Homepage() {
                     zIndex: '-1',
                 }}>
                     <div className="wave-container">
-                    <img src='/Images/wave (14).svg'/>
+                        <img src='/Images/wave (14).svg' />
 
                     </div>
                 </div>
@@ -264,7 +266,7 @@ function Homepage() {
 
                 >
                     <div className="wave-container">
-                    <img src='/Images/wave (15).svg'/>
+                        <img src='/Images/wave (15).svg' />
                     </div>
                 </div>
                 <Typography variant='h3' sx={{
@@ -295,8 +297,8 @@ function Homepage() {
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'space-between',
-                        my: 2, 
-                        
+                        my: 2,
+
 
 
 
@@ -508,25 +510,26 @@ function Homepage() {
                 id="marketplace"
                 sx={{
                     height: '80vh',
-                    my: 2,
+                    my: 0,
                     display: 'flex',
                     flexDirection: 'row-reverse',
                     alignItems: 'flex-start',
+                    justifyContent: 'space-between',
                     color: 'rgba(0, 0, 0, 0.6)',
                     position: 'relative',
-                    "&[data-aos='fade-up']": {
-                        animation: "fade-up-animation 1s ease-in-out",
-                    },
-                    "@keyframes fade-up-animation": {
-                        "0%": {
-                            opacity: 0,
-                            transform: "translateY(20px)",
-                        },
-                        "100%": {
-                            opacity: 1,
-                            transform: "translateY(0)",
-                        },
-                    },
+                    // "&[data-aos='fade-up']": {
+                    //     animation: "fade-up-animation 1s ease-in-out",
+                    // },
+                    // "@keyframes fade-up-animation": {
+                    //     "0%": {
+                    //         opacity: 0,
+                    //         transform: "translateY(20px)",
+                    //     },
+                    //     "100%": {
+                    //         opacity: 1,
+                    //         transform: "translateY(0)",
+                    //     },
+                    // },
                 }}
                 data-aos="fade-left"
 
@@ -534,7 +537,8 @@ function Homepage() {
                 <Box sx={{
                     textAlign: 'right',
                     width: '600px',
-                }}>
+                }}
+                >
                     <Typography variant='body1'>
                         <Typography variant='h2'>Marketplace</Typography>
                         Welcome to our Marketplace! Here, you have the opportunity to showcase your services on our website and reach a wider audience. Our platform allows you to create a listing for your services, providing a detailed description and other relevant information.
@@ -546,11 +550,22 @@ function Homepage() {
                     </Typography>
 
                     <Link to='/marketplace'>
-                        <Button>Marketplace</Button>
+                        <Button id='marketplace-home-btn' variant="outlined" sx={{
+                            backgroundColor: '#91d1cf',
+                            color: 'white',
+                            border: 'none',
+                            '&:hover': {
+                                backgroundColor: '#66a29e',
+                                border: 'none'
+                            }
+                        }}>Marketplace</Button>
                     </Link>
                 </Box>
-
-
+                <div data-aos="fade-right">
+                    <Paper elevation={12} sx={{ borderRadius: 3 }}>
+                        <img src='/Images/img1.jpg' style={{ width: '550px' }} />
+                    </Paper>
+                </div>
             </Box>
 
             <Zoom in={showButton}>
@@ -568,7 +583,7 @@ function Homepage() {
                     <KeyboardArrowUpIcon />
                 </Fab>
             </Zoom>
-            
+
 
 
         </div>
