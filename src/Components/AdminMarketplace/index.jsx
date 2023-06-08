@@ -12,8 +12,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../Context/auth.context';
 import '../../Pages/MarketplacePage/index.css';
 import Paper from '@mui/material/Paper';
-// import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, FormControl, Select, MenuItem, InputLabel } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField } from '@mui/material';
 import Slide from '@mui/material/Slide';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -82,23 +81,41 @@ function AdminMarketPlace() {
             .catch((error) => console.log(error))
     }
 
-    const handleOpenUpdate = (id) =>{
+    const handleUpload = async (e) => {
+        console.log(e);
+        try {
+            console.log('test');
+            //formData === enctype=multipart/formdata
+            const uploadData = new FormData();
+
+            //add the file to the formData
+            uploadData.append("image", e.target.files[0]);
+            const response = await axios.post(`${API_URL}/api/upload`, uploadData);
+            setImage(response.data.fileUrl);
+            e.target.value = null;
+            console.log(response.data.fileUrl, e);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleOpenUpdate = (id) => {
         setOpenEditDialog(true);
-                setTitle('Loading');
-                setDescription('Loading');
-                setContactNumber('Loading');
-                setEmail('Loading');
-                setImage('Loading');
+        setTitle('Loading');
+        setDescription('Loading');
+        setContactNumber('Loading');
+        setEmail('Loading');
+        setImage('Loading');
         axios
             .get(`${API_URL}/api/services/${id}`)
             .then((response) => {
                 setService(response.data);
-                setTitle(response.data.title? response.data.title : '');
-                setDescription(response.data.description?response.data.description: '');
-                setContactNumber(response.data.contactNumber?response.data.contactNumber: '' );
-                setEmail(response.data.email? response.data.email : '');
-                setImage(response.data.image? response.data.image:'');
-    
+                setTitle(response.data.title ? response.data.title : '');
+                setDescription(response.data.description ? response.data.description : '');
+                setContactNumber(response.data.contactNumber ? response.data.contactNumber : '');
+                setEmail(response.data.email ? response.data.email : '');
+                setImage(response.data.image ? response.data.image : '');
+
             })
             .catch((error) => console.log(error))
     }
@@ -106,7 +123,7 @@ function AdminMarketPlace() {
     const handleUpdate = (serviceId) => {
         setSuccess(false);
         let role = user.role;
-        let requestBody = { title, description, contactNumber, email, role };
+        let requestBody = { title, description, contactNumber, email, image, role };
 
 
         axios.put(`${API_URL}/api/services/${serviceId}`, requestBody)
@@ -167,12 +184,15 @@ function AdminMarketPlace() {
             marginTop: '25px',
             height: '80vh',
             overflowY: 'scroll',
-        }}>
+        }}
+        data-aos="fade-in">
 
-            <h1 style={{ margin: '10px', 
-            color:'#29584b',
-            marginLeft: '25px'
-             }}>Approved</h1>
+            <h1 style={{
+                margin: '10px',
+                color: '#29584b',
+                marginLeft: '25px'
+            }}
+            data-aos="fade-in">Approved</h1>
             <Box id='services-wrap'>
                 {services && services.map((service) => {
                     if (service.status == "approved") {
@@ -187,39 +207,31 @@ function AdminMarketPlace() {
                                     console.log(error);
                                     // Handle the error case if the service deletion fails.
                                 });
-
-                            {/* const updateService = (serviceId) => {
-            axios.update(`${API_URL}/api/services/${serviceId}`)
-              .then(() => {
-                // Service deleted successfully, you can perform any necessary actions
-                // such as updating the UI or displaying a success message.
-                getAllServices(); // Refresh the list of services
-              })
-              .catch((error) => {
-                console.log(error);
-                // Handle the error case if the service deletion fails.
-              })
-          }; */}
-
                         };
 
                         return (
-                            
+
                             <div key={service._id} >
-                                <Paper elevation={10} sx={{ borderRadius: 3 }}>
+                                <Paper elevation={10} sx={{ borderRadius: 3 }}
+                                >
                                     <Box>
                                         <Card sx={{
-                                            maxWidth: 345,
+                                            maxWidth: 300,
+                                            minWidth: 300,
+                                            minHeight: 380,
+                                            maxHeight: 300,
                                             mt: 3,
                                             mb: 2,
                                             borderRadius: 3,
-
-                                        }}>
+                                            objectFit: 'cover',
+                                            
+                                        }}
+                                        >
                                             <CardActionArea>
                                                 <CardMedia
                                                     component="img"
-                                                    height="200"
-                                                    image='/Images/img1.jpg'
+                                                    height="150"
+                                                    image={service.image ? service.image : '/Images/img1.jpg'}
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -229,6 +241,13 @@ function AdminMarketPlace() {
                                                     <Typography variant="body2" color="text.secondary">
                                                         {service.description}
                                                     </Typography>
+                                                    <br />
+                                                    <Typography variant="body2" color="text.secondary">
+                                                        <b>Contact info:</b> {service.contactNumber} 
+                                                    </Typography>
+                                                    <Typography variant="body2" color="text.secondary">
+                                                        <b>Email:</b> {service.email}
+                                                    </Typography>
                                                 </CardContent>
                                             </CardActionArea>
                                             <div style={{
@@ -237,12 +256,12 @@ function AdminMarketPlace() {
                                             }}>
                                                 <CardActions>
                                                     <IconButton onClick={() => deleteService(service._id)} aria-label="delete" size="large" sx={{
-                                                     
+
                                                         '&:hover': {
                                                             color: 'red'
                                                         }
                                                     }}>
-                                                        <DeleteIcon    sx={{
+                                                        <DeleteIcon sx={{
                                                             width: '30px',
                                                             height: '30px'
                                                         }} />
@@ -330,21 +349,22 @@ function AdminMarketPlace() {
                         />
                         <input
                             type="file"
+                            name="image"
                             accept="image/*"
                             id="image"
-                            onChange={handleImageUpload}
-                            required
+                            onChange={(e) => handleUpload(e)}
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={()=>handleUpdate(service._id)}>Update</Button>
+                        <Button onClick={() => handleUpdate(service._id)}>Update</Button>
                         <Button onClick={handleCloseEditDialog}>Cancel</Button>
                     </DialogActions>
                 </Dialog>
             </Box>
             {/* --------------------------------PENDING SECTION------------------------------------------------------------------ */}
 
-            <h1 style={{ margin: '5px', color:'#29584b', marginLeft: '25px' }}> Pending...</h1>
+            <h1 style={{ margin: '5px', color: '#29584b', marginLeft: '25px' }}
+            data-aos="fade-in"> Pending...</h1>
             <Box id='services-wrap' sx={{
                 mb: 4,
             }}>
@@ -382,7 +402,9 @@ function AdminMarketPlace() {
                                 <Paper elevation={10} sx={{ borderRadius: 3 }}>
                                     <Box>
                                         <Card sx={{
-                                            maxWidth: 345,
+                                            maxWidth: 300,
+                                            minWidth: 300,
+                                            minHeight: 300,
                                             mt: 3,
                                             borderRadius: 3,
                                             objectFit: 'cover'
@@ -393,7 +415,7 @@ function AdminMarketPlace() {
                                                 <CardMedia
                                                     component="img"
                                                     height="200"
-                                                    image='/Images/img1.jpg'
+                                                    image={service.image ? service.image : '/Images/img1.jpg'}
                                                     alt="green iguana"
                                                 />
                                                 <CardContent>
@@ -402,6 +424,13 @@ function AdminMarketPlace() {
                                                     </Typography>
                                                     <Typography variant="body2" color="text.secondary">
                                                         {service.description}
+                                                    </Typography>
+                                                    <br />
+                                                    <Typography variant="body2" color="text.secondary">
+                                                        <b>Contact info:</b> {service.contactNumber} | {service.email}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="text.secondary">
+                                                        <b>Email:</b> {service.email}
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>
@@ -502,10 +531,8 @@ function AdminMarketPlace() {
                         />
                         <input
                             type="file"
-                            accept="image/*"
-                            id="image"
-                            onChange={handleImageUpload}
-                            required
+                            name="image"
+                            onChange={(e) => handleUpload(e)}
                         />
                     </DialogContent>
                     <DialogActions>

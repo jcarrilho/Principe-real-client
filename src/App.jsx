@@ -8,7 +8,6 @@ import Homepage from './Pages/Homepage';
 import { Container } from '@mui/material';
 import SignupPage from './Pages/SignupPage';
 import Footer from './Components/Footer';
-import LoginPage from './Pages/LoginPage';
 import ProfilePage from './Pages/ProfilePage';
 import Wave from './Components/Wave';
 
@@ -28,7 +27,6 @@ function App() {
         <Route path='/' element={<Homepage />} />
         <Route path='/marketplace' element={<MarketplacePage />} />
         <Route path='/signup' element={<IsAnon><SignupPage /></IsAnon>} />
-        <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path='/profile' element={<ProfilePage />} />
       </Routes>
       

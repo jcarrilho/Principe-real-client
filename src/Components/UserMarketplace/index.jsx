@@ -103,7 +103,8 @@ function UserMarketPlace() {
   return (
     <Paper elevation={12} sx={{
       borderRadius: 3,
-    }}>
+    }}
+    data-aos="fade-in">
 
       <div className='scroll' id='services-wrap' style={{
         backgroundColor: 'rgba(142, 201, 199, 0.2)',
@@ -166,6 +167,13 @@ function UserMarketPlace() {
                           </Typography>
                           <Typography variant="body2" color="text.secondary">
                             {service.description}
+                          </Typography>
+                          <br/>
+                          <Typography variant="body2" color="text.secondary">
+                            <b>Contact info:</b> {service.contactNumber} | {service.email}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            <b>Email:</b> {service.email}
                           </Typography>
                         </CardContent>
                       </CardActionArea>
