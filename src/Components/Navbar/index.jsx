@@ -122,7 +122,7 @@ export default function HideAppBar(props) {
                     <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             <Link to="/">
-                                <img src='Pe+ºas individuais principe+real/Logo + Simbolos/logo 1.png' style={{ width: '150px', height: 'auto', filter: 'brightness(0) invert(1)' }} />
+                                <img src='/Pe+ºas individuais principe+real/Logo + Simbolos/logo 1.png' style={{ width: '150px', height: 'auto', filter: 'brightness(0) invert(1)' }} />
                             </Link>
                         </Typography>
                         {/* <Link to="/">
