@@ -49,7 +49,7 @@ function YourProfilePage() {
                     
                 }}>
                     <h1>Welcome, {userData.firstName} {userData.lastName}. This is your Profile.</h1>
-                    <img src="/Images/logo P+R_ROSA_rgb-02.png" style={{width: '300px'}}/>
+                    <img src="/Images/logo P+R_VERDE_rgb-02 PEQUENO.png" style={{width: '300px'}}/>
                 </div>
             )}
         </div>

@@ -42,6 +42,10 @@ function Homepage() {
 
     const [page, setPage] = useState(1);
 
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    };
+
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -81,8 +85,10 @@ function Homepage() {
             >
 
 
-                <Paper elevation={12} sx={{ borderRadius: 3,
-                width: '90%', }}>
+                <Paper elevation={12} sx={{
+                    borderRadius: 3,
+                    width: '90%',
+                }}>
 
                     <Carousel style={{
                         borderRadius: 10,
@@ -261,6 +267,7 @@ function Homepage() {
                     margin: 'auto',
                     left: 'calc(-50vw + 49.3%)',
                     zIndex: '-1',
+                    
                 }}
 
                 >
@@ -297,7 +304,7 @@ function Homepage() {
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         my: 2,
-
+                      
 
 
 
@@ -318,7 +325,7 @@ function Homepage() {
                         data-aos="fade-up" >
                         {page === 1 && (
                             < >
-                                <Paper elevation={12} sx={{ borderRadius: 3 }}>
+                                <Paper elevation={12} sx={{ borderRadius: 3, }}>
                                     <Link to="https://lisboasecreta.co/10-sitios-principe-real/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                                         <Card id='card1' sx={{
                                             maxWidth: 345,

@@ -185,14 +185,14 @@ function AdminMarketPlace() {
             height: '80vh',
             overflowY: 'scroll',
         }}
-        data-aos="fade-in">
+            data-aos="fade-in">
 
             <h1 style={{
                 margin: '10px',
                 color: '#29584b',
                 marginLeft: '25px'
             }}
-            data-aos="fade-in">Approved</h1>
+                data-aos="fade-in">Approved</h1>
             <Box id='services-wrap'>
                 {services && services.map((service) => {
                     if (service.status == "approved") {
@@ -224,7 +224,7 @@ function AdminMarketPlace() {
                                             mb: 2,
                                             borderRadius: 3,
                                             objectFit: 'cover',
-                                            
+
                                         }}
                                         >
                                             <CardActionArea>
@@ -243,7 +243,7 @@ function AdminMarketPlace() {
                                                     </Typography>
                                                     <br />
                                                     <Typography variant="body2" color="text.secondary">
-                                                        <b>Contact info:</b> {service.contactNumber} 
+                                                        <b>Contact info:</b> {service.contactNumber}
                                                     </Typography>
                                                     <Typography variant="body2" color="text.secondary">
                                                         <b>Email:</b> {service.email}
@@ -251,11 +251,19 @@ function AdminMarketPlace() {
                                                 </CardContent>
                                             </CardActionArea>
                                             <div style={{
-                                                display: 'flex',
-                                                justifyContent: 'center',
+                                                // display: 'flex',
+                                                // justifyContent: 'center',
                                             }}>
-                                                <CardActions>
-                                                    <IconButton onClick={() => deleteService(service._id)} aria-label="delete" size="large" sx={{
+                                                <CardActions sx={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center'
+                                                }}>
+                                                    <Button onClick={() => deleteService(service._id)} variant="outlined" color="error" style={{
+                                                        padding: '3px'
+                                                    }}>
+                                                        Delete
+                                                    </Button>
+                                                    {/* <IconButton onClick={() => deleteService(service._id)} aria-label="delete" size="large" sx={{
 
                                                         '&:hover': {
                                                             color: 'red'
@@ -265,14 +273,15 @@ function AdminMarketPlace() {
                                                             width: '30px',
                                                             height: '30px'
                                                         }} />
-                                                    </IconButton>
-                                                    <Button onClick={() => handleOpenUpdate(service._id)} size="small" color="primary" sx={{
-                                                        backgroundColor: '#91d1cf',
-                                                        color: 'white',
-                                                        border: 'none',
+                                                    </IconButton> */}
+                                                    
+                                                    <Button onClick={() => handleOpenUpdate(service._id)} size="small" sx={{
+                                                        color: '#66a29e',
+                                                        border: 1,
+                                                        borderColor: '#66a29e',
                                                         '&:hover': {
-                                                            backgroundColor: '#66a29e',
-                                                            border: 'none'
+                                                            backgroundColor: 'rgba(102, 162, 158, 0.1)',
+                                                            
                                                         }
                                                     }}>
                                                         Edit
@@ -297,9 +306,6 @@ function AdminMarketPlace() {
                 >
                     <DialogTitle>{"UPDATE A SERVICE"}</DialogTitle>
                     <DialogContent>
-                        {/* <DialogContentText id="alert-dialog-slide-description">
-                            Welcome to our service posting platform! With this form, you can showcase your services on our website. Once you submit the form, our admin team will review your submission and approve it for listing on our platform. We are excited to have you share your expertise with our community! 😀
-                        </DialogContentText> */}
                         <TextField
                             autoFocus
                             margin="dense"
@@ -364,7 +370,7 @@ function AdminMarketPlace() {
             {/* --------------------------------PENDING SECTION------------------------------------------------------------------ */}
 
             <h1 style={{ margin: '5px', color: '#29584b', marginLeft: '25px' }}
-            data-aos="fade-in"> Pending...</h1>
+                data-aos="fade-in"> Pending...</h1>
             <Box id='services-wrap' sx={{
                 mb: 4,
             }}>
