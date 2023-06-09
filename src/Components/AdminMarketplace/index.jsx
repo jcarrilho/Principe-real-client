@@ -433,7 +433,7 @@ function AdminMarketPlace() {
                                                     </Typography>
                                                     <br />
                                                     <Typography variant="body2" color="text.secondary">
-                                                        <b>Contact info:</b> {service.contactNumber} | {service.email}
+                                                        <b>Contact info:</b> {service.contactNumber} 
                                                     </Typography>
                                                     <Typography variant="body2" color="text.secondary">
                                                         <b>Email:</b> {service.email}

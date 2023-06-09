@@ -147,10 +147,14 @@ function UserMarketPlace() {
                 <Paper elevation={6} sx={{ borderRadius: 3 }}>
                   <Box>
                     <Card sx={{
-                      maxWidth: 345,
-                      mt: 4,
-                      my: 2,
-                      borderRadius: 3,
+                      maxWidth: 300,
+                                            minWidth: 300,
+                                            minHeight: 380,
+                                            maxHeight: 300,
+                                            mt: 3,
+                                            mb: 2,
+                                            borderRadius: 3,
+                                            objectFit: 'cover',
 
                     }}>
 
