@@ -91,8 +91,6 @@ function Homepage() {
                 }}>
 
                     <Carousel style={{
-                        borderRadius: 10,
-                        // width: '90%',
                         "&[data-aos='fade-up']": {
                             animation: "fade-up-animation 1s ease-in-out",
                         },
