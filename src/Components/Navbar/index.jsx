@@ -264,7 +264,7 @@ export default function Navbar(props) {
                                 flexDirection: 'column',
                                 justifyContent: 'center',
                                 margin: 'auto',
-                                backgroundColor: 'rgba(142, 201, 199, 0.3)',
+                                backgroundColor: 'whitesmoke',
 
                             }}>
                                 <DialogTitle sx={{ margin: 'auto', fontSize: '2rem', color: '#29584b' }}>Welcome!</DialogTitle>
@@ -313,7 +313,7 @@ export default function Navbar(props) {
                                     </DialogContentText>
                                 </DialogContent>
                             </Box>
-                            <DialogActions sx={{ backgroundColor: 'rgba(142, 201, 199, 0.3)' }}>
+                            <DialogActions sx={{ backgroundColor: 'whitesmoke' }}>
                                 <Box sx={{ color: '#fff' }}>
                                     <Button onClick={handleSubmit} sx={{
                                         color: '#29584b',
@@ -349,10 +349,10 @@ export default function Navbar(props) {
                                 flexDirection: 'column',
                                 justifyContent: 'center',
                                 margin: 'auto',
-                                backgroundColor: 'rgba(142, 201, 199, 0.3)',
+                                backgroundColor: 'whitesmoke',
 
                             }}>
-                                <DialogTitle sx={{ margin: 'auto', fontSize: '2rem', color: '#29584b' }}>Sign Up!</DialogTitle>
+                                <DialogTitle sx={{ margin: 'auto', fontSize: '2rem', color: '#29584b' }}>Sign Up</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText id="alert-dialog-slide-description">
                                         <Box
@@ -427,7 +427,7 @@ export default function Navbar(props) {
                                     </DialogContentText>
                                 </DialogContent>
                             </Box>
-                            <DialogActions sx={{ backgroundColor: 'rgba(142, 201, 199, 0.3)' }}>
+                            <DialogActions sx={{ backgroundColor: 'whitesmoke' }}>
                                 <Box sx={{ color: '#fff' }}>
                                 <Button type='submit' onClick={handleSignup} sx={{
                                         color: '#29584b',
