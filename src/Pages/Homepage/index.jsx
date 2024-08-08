@@ -545,10 +545,10 @@ function Homepage() {
                 >
                     <Typography variant='body1'>
                         <Typography variant='h2'>Marketplace</Typography>
-                        Welcome to our Marketplace! Here, you have the opportunity to showcase your services on our website and reach a wider audience. Our platform allows you to create a listing for your services, providing a detailed description and other relevant information.
+                        Bem-vindo ao nosso Mercado! Aqui, tem a oportunidade de apresentar os seus serviços no nosso site e alcançar um público mais vasto. A nossa plataforma permite-lhe criar uma listagem dos seus serviços, fornecendo uma descrição detalhada e outras informações relevantes.
                         <br />
                         <br />
-                        By joining our Marketplace, you can connect with potential clients and grow your business. Whether you offer professional services, creative solutions, or specialized expertise, our community is eager to discover what you have to offer.
+                        Ao aderir ao nosso Marketplace, pode conectar-se com potenciais clientes e expandir o seu negócio. Quer ofereça serviços profissionais, soluções criativas ou conhecimentos especializados, a nossa comunidade está ansiosa por descobrir o que tem para oferecer.
                         <br />
                         <br />
                     </Typography>
