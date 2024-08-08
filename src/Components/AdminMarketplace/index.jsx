@@ -484,10 +484,10 @@ function AdminMarketPlace() {
                         onClose={handleClose}
                         aria-describedby="alert-dialog-slide-description"
                     >
-                        <DialogTitle>{"CREATE A NEW SERVICE"}</DialogTitle>
+                        <DialogTitle>{"POSTAR UM NOVO SERVIÇO"}</DialogTitle>
                         <DialogContent>
                             <DialogContentText id="alert-dialog-slide-description">
-                                Welcome to our service posting platform! With this form, you can showcase your services on our website. Once you submit the form, our admin team will review your submission and approve it for listing on our platform. We are excited to have you share your expertise with our community! 😀
+                            Bem-vindo à nossa plataforma de publicação de serviços! Com este formulário, pode divulgar os seus serviços no nosso site. Depois de submeter o formulário, a nossa equipa de administração analisará o seu envio e aprová-lo-á para listagem na nossa plataforma. Estamos entusiasmados por tê-lo a partilhar a sua experiência com a nossa comunidade! 😀
                             </DialogContentText>
                             <TextField
                                 autoFocus
